@@ -7,6 +7,7 @@
 
 
 #include "MainWindow.h"
+#include "EditorWidget.h"
 
 int main(int argc, char *argv[]) {
 
@@ -19,6 +20,10 @@ int main(int argc, char *argv[]) {
     w.resize(550,550);
     w.setToolTip("QWidget");
 
+    //Create Editorfield
+    EditorWidget *e = new EditorWidget(&w);
+
+    w.setCentralWidget(e);
     //Show window
     w.show();
 
