@@ -6,7 +6,9 @@
 #define ALPHA_EDITOR_MAINWINDOW_H
 
 #include <QMainWindow>
-
+#include <QMenuBar>
+#include <QToolBar>
+#include <QTextCharFormat>
 
 class MainWindow : public QMainWindow {
 
