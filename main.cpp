@@ -7,7 +7,6 @@
 
 
 #include "MainWindow.h"
-#include "EditorWidget.h"
 
 int main(int argc, char *argv[]) {
 

@@ -3,7 +3,7 @@
 //
 
 #include "MainWindow.h"
-#include "EditorWidget.h"
+#include "ToolHandler.h"
 
 
 //Close window when window is exited
@@ -18,7 +18,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent){
     setWindowTitle("Aplha Editor");
 
     //Create editorWidget
-    EditorWidget *editorWidget = new EditorWidget(this);
+    QTextEdit *editorWidget = new QTextEdit(this);
     //Set Central Widget of MainWindow to editorWidget
     setCentralWidget(editorWidget);
 
@@ -40,28 +40,13 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent){
 
     //Create Underline Button for toolbar
     QAction *underline = new QAction("U", this);
-    //Turn it inot checkable button
+    //Turn it into checkable button
     underline->setCheckable(true);
     //Add Button to toolbar
     toolbar->addAction(underline);
 
     //Connect Signals and Slots
-    connect(underline, &QAction::triggered, this, [editorWidget, underline] () {
-
-        //Receive current cursor - format and font
-        QTextCursor cursor = editorWidget->textCursor();
-        QTextCharFormat format = cursor.charFormat();
-        QFont font = format.font();
-
-        //Set font to underline/not underline depending on current state
-        font.setUnderline(!font.underline());
-        format.setFont(font);
-        cursor.setCharFormat(format);
-        //Add Cursor back to editor
-        editorWidget->setTextCursor(cursor);
-
-        //Set button checked/unchecked
-        underline->setChecked(font.underline());
+    connect(underline, &QAction::triggered, this, [editorWidget, underline] (){
+        ToolHandler::handleUnderline(editorWidget, underline);
     });
-
 };

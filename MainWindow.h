@@ -9,6 +9,7 @@
 #include <QMenuBar>
 #include <QToolBar>
 #include <QTextCharFormat>
+#include <QTextEdit>
 
 class MainWindow : public QMainWindow {
 
