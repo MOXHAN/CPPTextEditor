@@ -18,11 +18,19 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent){
     setWindowTitle("Aplha Editor");
 
     //Create editorWidget
-    QTextEdit *editorWidget = new QTextEdit(this);
+    editorWidget = new QTextEdit(this);
     //Set Central Widget of MainWindow to editorWidget
     setCentralWidget(editorWidget);
 
-    //Setup Menubar
+    //Setup menuBar
+    setupMenuBar();
+
+    //Setup ToolBar
+    setupToolBar();
+};
+
+void MainWindow::setupMenuBar() {
+
     //menuBar() returns MainWindows menubar, addMenu adds a Menu item
     QMenu *Menu = menuBar()->addMenu(tr("&Menu"));
     //Creates Dropdown Menu Item
@@ -34,7 +42,10 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent){
     //Add Dropdown Menu item to Menu Item
     Menu->addAction(fileQuit);
 
-    //Setup Toolbar
+}
+
+void MainWindow::setupToolBar() {
+
     //create toolbar
     QToolBar *toolbar = addToolBar("MyToolBar");
 
@@ -46,7 +57,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent){
     toolbar->addAction(underline);
 
     //Connect Signals and Slots
-    connect(underline, &QAction::triggered, this, [editorWidget, underline] (){
+    connect(underline, &QAction::triggered, this, [this, underline] (){
         ToolHandler::handleUnderline(editorWidget, underline);
     });
 };

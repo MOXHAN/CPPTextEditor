@@ -18,10 +18,15 @@ Q_OBJECT
 public:
     explicit MainWindow(QWidget *parent = 0);
 
+protected:
+    QTextEdit *editorWidget;
+
 private slots:
     void on_actionExit_triggered();
 
 private:
+    void setupToolBar();
+    void setupMenuBar();
 
 };
 
