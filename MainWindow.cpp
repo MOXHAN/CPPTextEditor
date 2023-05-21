@@ -56,8 +56,39 @@ void MainWindow::setupToolBar() {
     //Add Button to toolbar
     toolbar->addAction(underline);
 
+    //Create bold Button for toolbar
+    QAction *bold = new QAction("B", this);
+    //Turn it into checkable button
+    bold->setCheckable(true);
+    //Add Button to toolbar
+    toolbar->addAction(bold);
+
+    //Create italic Button for toolbar
+    QAction *italic = new QAction("K", this);
+    //Turn it into checkable button
+    italic->setCheckable(true);
+    //Add Button to toolbar
+    toolbar->addAction(italic);
+
+    //Create marker Button for toolbar
+    QAction *marker = new QAction("Yellow", this);
+    //Turn it into checkable button
+    marker->setCheckable(true);
+    //Add Button to toolbar
+    toolbar->addAction(marker);
+
     //Connect Signals and Slots
     connect(underline, &QAction::triggered, this, [this, underline] (){
         ToolHandler::handleUnderline(editorWidget, underline);
     });
+    connect(bold, &QAction::triggered, this, [this, bold] (){
+        ToolHandler::handleBold(editorWidget, bold);
+    });
+    connect(italic, &QAction::triggered, this, [this, italic] (){
+        ToolHandler::handleItalic(editorWidget, italic);
+    });
+    connect(marker, &QAction::triggered, this, [this, marker] (){
+        ToolHandler::handleMarker(editorWidget, marker);
+    });
+
 };

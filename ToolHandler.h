@@ -7,6 +7,7 @@
 
 #include <QTextEdit>
 #include <QAction>
+#include <QColor>
 
 class ToolHandler : public QObject{
 
@@ -15,7 +16,9 @@ class ToolHandler : public QObject{
 public slots:
 
     static void handleUnderline(QTextEdit *editorWidget, QAction *underline);
-
+    static void handleBold(QTextEdit *editorWidget, QAction *bold);
+    static void handleItalic(QTextEdit *editorWidget, QAction *italic);
+    static void handleMarker(QTextEdit *editorWidget, QAction *marker);
 
 };
 
