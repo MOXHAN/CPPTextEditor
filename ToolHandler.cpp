@@ -43,8 +43,8 @@ void ToolHandler::handleBold(QTextEdit *editorWidget, QAction *bold) {
 void ToolHandler::handleItalic(QTextEdit *editorWidget, QAction *italic) {
 
     //Receive current cursor - format and font
-    QTextCursor cursor = editorWidget->textCursor();
-    QTextCharFormat format = cursor.charFormat();
+    QTextCursor cursor {editorWidget->textCursor()};
+    QTextCharFormat format {cursor.charFormat()};
     QFont font = format.font();
 
     //Set font to italic/not italic depending on current state

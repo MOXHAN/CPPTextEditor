@@ -12,7 +12,7 @@ find_package(Qt5 COMPONENTS
         Widgets
         REQUIRED)
 
-add_executable(Alpha_Editor main.cpp MainWindow.cpp ToolHandler.cpp)
+add_executable(Alpha_Editor main.cpp MainWindow.cpp ToolHandler.cpp EditorWidget.cpp LineNumberArea.cpp)
 
 target_link_libraries(Alpha_Editor
         Qt::Core

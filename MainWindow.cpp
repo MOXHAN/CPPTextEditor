@@ -4,6 +4,7 @@
 
 #include "MainWindow.h"
 #include "ToolHandler.h"
+#include "EditorWidget.h"
 
 
 //Close window when window is exited
@@ -18,7 +19,9 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent){
     setWindowTitle("Aplha Editor");
 
     //Create editorWidget
-    editorWidget = new QTextEdit(this);
+    //editorWidget = new QTextEdit(this);
+    editorWidget = new EditorWidget(this);
+
     //Set Central Widget of MainWindow to editorWidget
     setCentralWidget(editorWidget);
 
@@ -90,5 +93,5 @@ void MainWindow::setupToolBar() {
     connect(marker, &QAction::triggered, this, [this, marker] (){
         ToolHandler::handleMarker(editorWidget, marker);
     });
-
+    
 };
