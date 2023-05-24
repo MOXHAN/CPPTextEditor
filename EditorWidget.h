@@ -33,6 +33,9 @@ public slots:
 
     void resizeEvent(QResizeEvent *e);
 
+protected:
+    virtual void paintEvent(QPaintEvent *event) override;
+
 private slots:
 
     void updateLineNumberArea(QRectF /*rect_f*/);

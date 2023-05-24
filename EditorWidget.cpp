@@ -152,3 +152,37 @@ void EditorWidget::lineNumberAreaPaintEvent(QPaintEvent *event)
     }
 
 }
+
+void EditorWidget::paintEvent(QPaintEvent *event) {
+
+    //call Paint Event of super class to insure right behaviour
+    QTextEdit::paintEvent(event);
+
+    //get ID of current block
+    int currentBlockID = textCursor().blockNumber();
+    //get current block
+    QTextCursor currentCursor {textCursor()};
+
+    //iterate through all blocks
+    for(int i=0; i<document()->blockCount(); i++){
+        //get block
+        QTextBlock block = document()->findBlockByNumber(i);
+        //get format of current block
+        QTextBlockFormat blockFormat = block.blockFormat();
+        //Set default brush
+        QBrush brush {"white", Qt::SolidPattern};
+
+        //Only set background yellow if block is current block
+        if(i == currentBlockID){
+            brush.setColor("yellow");
+        }
+        //set Background of Blocks Format to the brush
+        blockFormat.setBackground(brush);
+        //get cursor for according block
+        QTextCursor cursor(block);
+        //Set format to cursor and cursor to widget
+        cursor.setBlockFormat(blockFormat);
+        setTextCursor(cursor);
+    }
+    setTextCursor(currentCursor);
+}
