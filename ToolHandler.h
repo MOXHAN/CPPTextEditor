@@ -19,7 +19,6 @@ public slots:
     static void handleBold(QTextEdit *editorWidget, QAction *bold);
     static void handleItalic(QTextEdit *editorWidget, QAction *italic);
     static void handleMarker(QTextEdit *editorWidget, QAction *marker);
-
 };
 
 

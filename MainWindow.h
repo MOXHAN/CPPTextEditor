@@ -11,6 +11,8 @@
 #include <QTextCharFormat>
 #include <QTextEdit>
 
+#include "EditorWidget.h"
+
 class MainWindow : public QMainWindow {
 
 Q_OBJECT
@@ -19,7 +21,7 @@ public:
     explicit MainWindow(QWidget *parent = 0);
 
 protected:
-    QTextEdit *editorWidget;
+    EditorWidget *editorWidget;
 
 private slots:
     void on_actionExit_triggered();
