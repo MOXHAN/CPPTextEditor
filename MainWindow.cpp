@@ -6,6 +6,7 @@
 #include "ToolHandler.h"
 #include "EditorWidget.h"
 #include "FileHandler.h"
+#include <QSharedPointer>
 
 
 //Close window when window is exited
@@ -38,12 +39,12 @@ void MainWindow::setupMenuBar() {
     //menuBar() returns MainWindows menubar, addMenu adds a Menu item
     QMenu *Menu = menuBar()->addMenu(tr("&Menu"));
     //Creates Dropdown Menu Items
-    QAction *fileQuit = new QAction("Quit", this);
+    QSharedPointer<QAction> fileQuit {new QAction("Quit", this)};
     QAction *fileSave = new QAction("save to txt", this);
     QAction *fileLoad = new QAction("load from txt", this);
 
     //connect Signals and Slots
-    connect(fileQuit, &QAction::triggered, this, [&](){
+    connect(fileQuit.get(), &QAction::triggered, this, [&](){
         close();
     });
     connect(fileSave, &QAction::triggered, this, [this, fileSave](){
@@ -53,7 +54,7 @@ void MainWindow::setupMenuBar() {
         FileHandler::handleLoad(editorWidget);
     });
     //Add Dropdown Menu item to Menu Item
-    Menu->addAction(fileQuit);
+    Menu->addAction(fileQuit.get());
     Menu->addAction(fileSave);
     Menu->addAction(fileLoad);
 

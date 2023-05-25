@@ -174,7 +174,7 @@ void EditorWidget::paintEvent(QPaintEvent *event) {
 
         //Only set background yellow if block is current block
         if(i == currentBlockID){
-            brush.setColor("yellow");
+            brush.setColor("lightgray");
         }
         //set Background of Blocks Format to the brush
         blockFormat.setBackground(brush);

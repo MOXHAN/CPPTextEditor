@@ -4,7 +4,10 @@
 
 #include "FileHandler.h"
 #include <fstream>
+#include <sstream>
 #include <string>
+#include <QDebug>
+#include <iostream>
 
 void FileHandler::handleSave(QTextDocument *document) {
 
@@ -24,11 +27,15 @@ void FileHandler::handleLoad(EditorWidget *editorWidget){
     std::ifstream readFromFile {"data.txt"};
     //Declare std string for read and qstring for write to document
     std::string data;
-    QString qstring;
+
+    std::ostringstream ss;
+    ss << readFromFile.rdbuf();
+    data = ss.str();
+
     //read in data
-    readFromFile >> data;
+    //readFromFile >> data;
     //convert std to q string
-    qstring.fromStdString(data);
+    QString qstring = QString::fromStdString(data);
     //write qstring to document
     document->setPlainText(qstring);
     //set document to Editor
