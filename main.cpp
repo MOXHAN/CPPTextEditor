@@ -7,6 +7,7 @@
 
 
 #include "MainWindow.h"
+#include "StartPopup.h"
 
 int main(int argc, char *argv[]) {
 
@@ -18,6 +19,9 @@ int main(int argc, char *argv[]) {
     //Design window
     w.resize(550,550);
     w.setToolTip("QWidget");
+
+    StartPopup startPopup(&w);
+    startPopup.exec();
 
     //Show window
     w.show();

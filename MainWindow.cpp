@@ -6,7 +6,7 @@
 #include "ToolHandler.h"
 #include "EditorWidget.h"
 #include "FileHandler.h"
-#include <QSharedPointer>
+#include <iostream>
 
 
 //Close window when window is exited
@@ -21,7 +21,6 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent){
     setWindowTitle("Aplha Editor");
 
     //Create editorWidget
-    //editorWidget = new QTextEdit(this);
     editorWidget = new EditorWidget(this);
 
     //Set Central Widget of MainWindow to editorWidget
@@ -39,12 +38,12 @@ void MainWindow::setupMenuBar() {
     //menuBar() returns MainWindows menubar, addMenu adds a Menu item
     QMenu *Menu = menuBar()->addMenu(tr("&Menu"));
     //Creates Dropdown Menu Items
-    QSharedPointer<QAction> fileQuit {new QAction("Quit", this)};
+    QAction *fileQuit {new QAction("Quit", this)};
     QAction *fileSave = new QAction("save to txt", this);
     QAction *fileLoad = new QAction("load from txt", this);
 
     //connect Signals and Slots
-    connect(fileQuit.get(), &QAction::triggered, this, [&](){
+    connect(fileQuit, &QAction::triggered, this, [&](){
         close();
     });
     connect(fileSave, &QAction::triggered, this, [this, fileSave](){
@@ -54,7 +53,7 @@ void MainWindow::setupMenuBar() {
         FileHandler::handleLoad(editorWidget);
     });
     //Add Dropdown Menu item to Menu Item
-    Menu->addAction(fileQuit.get());
+    Menu->addAction(fileQuit);
     Menu->addAction(fileSave);
     Menu->addAction(fileLoad);
 

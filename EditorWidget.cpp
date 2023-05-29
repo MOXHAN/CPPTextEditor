@@ -6,6 +6,7 @@
 #include "LineNumberArea.h"
 
 EditorWidget::EditorWidget(QWidget *parent) : QTextEdit(parent){
+
     // Line numbers
     lineNumberArea = new LineNumberArea(this);
 
@@ -22,6 +23,9 @@ EditorWidget::EditorWidget(QWidget *parent) : QTextEdit(parent){
 
     //Horizontal Scroll instead of Linewrap
     setLineWrapMode(NoWrap);
+    //Enable Undo/Redo
+    setUndoRedoEnabled(true);
+    document()->setUndoRedoEnabled(true);
 }
 
 void EditorWidget::updateLineNumberArea(QRectF /*rect_f*/)
@@ -128,8 +132,6 @@ void EditorWidget::lineNumberAreaPaintEvent(QPaintEvent *event)
     // Shift the starting point
     top += additional_margin;
 
-
-
     int bottom = top + (int) this->document()->documentLayout()->blockBoundingRect(block).height();
 
     QColor col_1(90, 255, 30);      // Current line (custom green)
@@ -155,26 +157,29 @@ void EditorWidget::lineNumberAreaPaintEvent(QPaintEvent *event)
 
 void EditorWidget::paintEvent(QPaintEvent *event) {
 
-    //call Paint Event of super class to insure right behaviour
-    QTextEdit::paintEvent(event);
-
     //get ID of current block
     int currentBlockID = textCursor().blockNumber();
     //get current block
     QTextCursor currentCursor {textCursor()};
 
+    QTextBlock block;
+    QTextBlockFormat blockFormat;
+    QBrush brush;
+    brush.setStyle(Qt::SolidPattern);
+
     //iterate through all blocks
     for(int i=0; i<document()->blockCount(); i++){
         //get block
-        QTextBlock block = document()->findBlockByNumber(i);
+        block = document()->findBlockByNumber(i);
         //get format of current block
-        QTextBlockFormat blockFormat = block.blockFormat();
-        //Set default brush
-        QBrush brush {"white", Qt::SolidPattern};
+        blockFormat = block.blockFormat();
 
         //Only set background yellow if block is current block
         if(i == currentBlockID){
             brush.setColor("lightgray");
+        } else {
+            //Set default brush
+            brush.setColor("white");
         }
         //set Background of Blocks Format to the brush
         blockFormat.setBackground(brush);
@@ -184,5 +189,9 @@ void EditorWidget::paintEvent(QPaintEvent *event) {
         cursor.setBlockFormat(blockFormat);
         setTextCursor(cursor);
     }
+    //Set cursor back to recent position
     setTextCursor(currentCursor);
+
+    //call Paint Event of super class to insure right behaviour
+    QTextEdit::paintEvent(event);
 }

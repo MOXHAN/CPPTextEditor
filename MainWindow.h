@@ -19,8 +19,6 @@ Q_OBJECT
 
 public:
     explicit MainWindow(QWidget *parent = 0);
-
-protected:
     EditorWidget *editorWidget;
 
 private slots:

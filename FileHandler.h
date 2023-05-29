@@ -17,6 +17,13 @@ class FileHandler : public QObject{
 public:
     static void handleSave(QTextDocument *document);
     static void handleLoad(EditorWidget *editorWidget);
+    static void handleLoad(EditorWidget *editorWidget, std::string path);
+    static void loadLast(EditorWidget *editorWidget);
+    static void savePathLast(std::string path);
+
+private:
+
+    static std::string getPathLastFile();
 
 };
 
