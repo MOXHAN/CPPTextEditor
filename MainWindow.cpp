@@ -47,7 +47,7 @@ void MainWindow::setupMenuBar() {
         close();
     });
     connect(fileSave, &QAction::triggered, this, [this, fileSave](){
-        FileHandler::handleSave(this->editorWidget->document());
+        FileHandler::handleSave(editorWidget, editorWidget->document());
     });
     connect(fileLoad, &QAction::triggered, this, [this](){
         FileHandler::handleLoad(editorWidget);

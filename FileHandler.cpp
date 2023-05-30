@@ -6,29 +6,32 @@
 #include <fstream>
 #include <sstream>
 #include <string>
-#include <QDebug>
 #include <iostream>
+#include <QDebug>
+#include <QFileDialog>
 
-void FileHandler::handleSave(QTextDocument *document) {
+void FileHandler::handleSave(EditorWidget *editorWidget, QTextDocument *document) {
 
-    std::string fileName {"data.txt"};
+    QString fileName = QFileDialog::getSaveFileName(editorWidget,
+                                                    tr("Open Textfile"), "/home", tr("Text Files (*.txt)"));
     //create file outstream
-    std::ofstream writeToFile {fileName};
+    std::ofstream writeToFile {fileName.toStdString()};
     //write contents to txt file
     writeToFile << document->toPlainText().toStdString();
     //close outstream
     writeToFile.close();
 
     //write path to saved file to "pathlast.txt" to save it for next session
-    savePathLast(fileName);
+    savePathLast(fileName.toStdString());
 
 }
 
 void FileHandler::handleLoad(EditorWidget *editorWidget){
 
-    QTextDocument *document = editorWidget->document();
+    QString fileName = QFileDialog::getOpenFileName(editorWidget,
+                                            tr("Open Textfile"), "/home", tr("Text Files (*.txt)"));
     //create file instream
-    std::ifstream readFromFile {"data.txt"};
+    std::ifstream readFromFile {fileName.toStdString()};
     //Declare std string for read and qstring for write to document
     std::string data;
 
@@ -36,6 +39,7 @@ void FileHandler::handleLoad(EditorWidget *editorWidget){
     ss << readFromFile.rdbuf();
     data = ss.str();
 
+    QTextDocument *document = editorWidget->document();
     //convert std to q string
     QString qstring = QString::fromStdString(data);
     //write qstring to document
@@ -67,7 +71,7 @@ void FileHandler::handleLoad(EditorWidget *editorWidget, std::string path){
 
 std::string FileHandler::getPathLastFile() {
     //create file instream
-    std::ifstream readFromFile {"lastPath.txt"};
+    std::ifstream readFromFile {"pathLast.txt"};
     //Declare std string for read
     std::string path;
 
