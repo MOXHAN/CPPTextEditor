@@ -6,6 +6,7 @@
 #include "ToolHandler.h"
 #include "EditorWidget.h"
 #include "FileHandler.h"
+#include "PopUpWindow.h"
 #include <iostream>
 
 
@@ -44,6 +45,8 @@ void MainWindow::setupMenuBar() {
 
     //connect Signals and Slots
     connect(fileQuit, &QAction::triggered, this, [&](){
+        PopUpWindow closePopup(this, editorWidget->document());
+        closePopup.exec();
         close();
     });
     connect(fileSave, &QAction::triggered, this, [this, fileSave](){
