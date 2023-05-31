@@ -12,6 +12,7 @@
 #include <QTextEdit>
 
 #include "EditorWidget.h"
+#include "FileDocker.h"
 
 class MainWindow : public QMainWindow {
 

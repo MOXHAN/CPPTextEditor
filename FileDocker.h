@@ -13,13 +13,12 @@
 class FileDocker : public QDockWidget{
 
 public:
-    explicit FileDocker(MainWindow *parent);
+    explicit FileDocker(QWidget *parent);
 
     void addButton();
 
 private:
     QToolBar *fileBar;
-    DocumentHandler documentHandler;
 
 };
 

@@ -4,6 +4,7 @@
 
 #include "EditorWidget.h"
 #include "LineNumberArea.h"
+#include "DocumentHandler.h"
 
 EditorWidget::EditorWidget(QWidget *parent) : QTextEdit(parent){
 
@@ -26,6 +27,10 @@ EditorWidget::EditorWidget(QWidget *parent) : QTextEdit(parent){
     //Enable Undo/Redo
     setUndoRedoEnabled(true);
     document()->setUndoRedoEnabled(true);
+
+    //Add original document to DocumentHandler map
+    DocumentHandler::addDocumentToMap("document 1", document());
+
 }
 
 void EditorWidget::updateLineNumberArea(QRectF /*rect_f*/)

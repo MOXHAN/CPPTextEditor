@@ -7,6 +7,7 @@
 #include "EditorWidget.h"
 #include "FileHandler.h"
 #include "PopUpWindow.h"
+#include "FileDocker.h"
 #include <iostream>
 
 
@@ -26,6 +27,11 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent){
 
     //Set Central Widget of MainWindow to editorWidget
     setCentralWidget(editorWidget);
+
+    //Create Instance of FileDocker
+    FileDocker *fileDocker = new FileDocker(this);
+    //Set DockerWidget
+    addDockWidget(Qt::TopDockWidgetArea, fileDocker);
 
     //Setup menuBar
     setupMenuBar();
