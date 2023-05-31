@@ -13,7 +13,9 @@ FileDocker::FileDocker(MainWindow *parent) : QDockWidget(parent){
     //create buttons/actions
     QAction *plusButton {new QAction("+", this)};
     //connect actions with slots
-    connect(plusButton, &QAction::triggered, this, ),
+    connect(plusButton, &QAction::triggered, this, [&] () {
+        documentHandler.addDocumentToMap("document2");
+    });
 
     //add buttons to toolbar
     fileBar->addAction(plusButton);
@@ -26,10 +28,17 @@ FileDocker::FileDocker(MainWindow *parent) : QDockWidget(parent){
 void FileDocker::addButton() {
 
     //create action/button for given document
+    QAction *button {new QAction("+", this)};
+
+    //create key
+    std::string key {"document " + std::to_string(documentHandler.getDocumentCount())};
 
     //connect button to open given document
-
+    connect(button, &QAction::triggered, this, [&] () {
+        documentHandler.addDocumentToMap(key);
+    });
     //add button to toolbar
+    fileBar->addAction(button);
 
     //add modified toolbar widget back to docker widget
     setWidget(fileBar);

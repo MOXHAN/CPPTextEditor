@@ -7,6 +7,7 @@
 
 #include <QDockWidget>
 #include "MainWindow.h"
+#include "DocumentHandler.h"
 
 
 class FileDocker : public QDockWidget{
@@ -18,6 +19,7 @@ public:
 
 private:
     QToolBar *fileBar;
+    DocumentHandler documentHandler;
 
 };
 
