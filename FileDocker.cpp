@@ -2,11 +2,14 @@
 // Created by maximhansen on 30.05.2023.
 //
 
+#include <iostream>
 #include "FileDocker.h"
-#include "EditorWidget.h"
+#include "DocumentHandler.h"
 
-FileDocker::FileDocker(QWidget *parent) : QDockWidget(parent){
+FileDocker::FileDocker(MainWindow *parent, EditorWidget *editorWidget) : QDockWidget(parent){
 
+    //set editorWidget
+    editorWidget = editorWidget;
     //create toolbar
     fileBar = new QToolBar {this};
 
@@ -14,9 +17,16 @@ FileDocker::FileDocker(QWidget *parent) : QDockWidget(parent){
     QAction *plusButton {new QAction("+", this)};
     //connect actions with slots
     connect(plusButton, &QAction::triggered, this, [&] () {
-        DocumentHandler::addDocumentToMap("document2");
-        //Setzen des Documents im Editor Widget
-        //editorWidget->setDocument(DocumentHandler::documentMap[key];
+        DocumentHandler::addDocumentToMap("document 2");
+
+        std::cout << DocumentHandler::getDocumentPathFromMap("document 2") << std::endl;
+
+        QTextDocument *doc = editorWidget->document();
+        //doc->setPlainText(DocumentHandler::getDocumentPathFromMap("document 2")->toPlainText());
+        //change Button text from "+" to "document 2"
+        //plusButton->setText("document 2");
+        //add new button for next doc
+        //addButton();
     });
 
     //add buttons to toolbar
@@ -47,4 +57,4 @@ void FileDocker::addButton() {
     //add modified toolbar widget back to docker widget
     setWidget(fileBar);
 
-}
+};

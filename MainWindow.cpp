@@ -9,6 +9,7 @@
 #include "PopUpWindow.h"
 #include "FileDocker.h"
 #include <iostream>
+#include <QFileDialog>
 
 
 //Close window when window is exited
@@ -29,7 +30,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent){
     setCentralWidget(editorWidget);
 
     //Create Instance of FileDocker
-    FileDocker *fileDocker = new FileDocker(this);
+    FileDocker *fileDocker = new FileDocker(this, editorWidget);
     //Set DockerWidget
     addDockWidget(Qt::TopDockWidgetArea, fileDocker);
 
@@ -56,7 +57,7 @@ void MainWindow::setupMenuBar() {
         close();
     });
     connect(fileSave, &QAction::triggered, this, [this, fileSave](){
-        FileHandler::handleSave(editorWidget, editorWidget->document());
+        FileHandler::handleSave(editorWidget);
     });
     connect(fileLoad, &QAction::triggered, this, [this](){
         FileHandler::handleLoad(editorWidget);

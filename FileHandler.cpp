@@ -10,14 +10,14 @@
 #include <QDebug>
 #include <QFileDialog>
 
-void FileHandler::handleSave(EditorWidget *editorWidget, QTextDocument *document) {
+void FileHandler::handleSave(QTextEdit *editorWidget) {
 
     QString fileName = QFileDialog::getSaveFileName(editorWidget,
                                                     tr("Open Textfile"), "/home", tr("Text Files (*.txt)"));
     //create file outstream
     std::ofstream writeToFile {fileName.toStdString()};
     //write contents to txt file
-    writeToFile << document->toPlainText().toStdString();
+    writeToFile << editorWidget->document()->toPlainText().toStdString();
     //close outstream
     writeToFile.close();
 
@@ -26,7 +26,7 @@ void FileHandler::handleSave(EditorWidget *editorWidget, QTextDocument *document
 
 }
 
-void FileHandler::handleLoad(EditorWidget *editorWidget){
+void FileHandler::handleLoad(QTextEdit *editorWidget){
 
     QString fileName = QFileDialog::getOpenFileName(editorWidget,
                                             tr("Open Textfile"), "/home", tr("Text Files (*.txt)"));
@@ -44,11 +44,10 @@ void FileHandler::handleLoad(EditorWidget *editorWidget){
     QString qstring = QString::fromStdString(data);
     //write qstring to document
     document->setPlainText(qstring);
-    //set document to Editor
-    editorWidget->setDocument(document);
+
 }
 
-void FileHandler::handleLoad(EditorWidget *editorWidget, std::string path){
+void FileHandler::handleLoad(QTextEdit *editorWidget, std::string path){
 
     //create file instream
     std::ifstream readFromFile {path};
@@ -82,7 +81,7 @@ std::string FileHandler::getPathLastFile() {
     return path;
 }
 
-void FileHandler::loadLast(EditorWidget *editorWidget) {
+void FileHandler::loadLast(QTextEdit *editorWidget) {
 
     //receive path to last opened txt
     std::string path {getPathLastFile()};

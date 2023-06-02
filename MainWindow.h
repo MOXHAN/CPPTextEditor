@@ -12,7 +12,6 @@
 #include <QTextEdit>
 
 #include "EditorWidget.h"
-#include "FileDocker.h"
 
 class MainWindow : public QMainWindow {
 
@@ -20,7 +19,7 @@ Q_OBJECT
 
 public:
     explicit MainWindow(QWidget *parent = 0);
-    EditorWidget *editorWidget;
+    EditorWidget* getEditorWidget(){return editorWidget;};
 
 private slots:
     void on_actionExit_triggered();
@@ -28,6 +27,7 @@ private slots:
 private:
     void setupToolBar();
     void setupMenuBar();
+    EditorWidget *editorWidget;
 
 };
 

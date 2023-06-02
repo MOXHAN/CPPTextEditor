@@ -29,7 +29,7 @@ EditorWidget::EditorWidget(QWidget *parent) : QTextEdit(parent){
     document()->setUndoRedoEnabled(true);
 
     //Add original document to DocumentHandler map
-    DocumentHandler::addDocumentToMap("document 1", document());
+    //DocumentHandler::addDocumentToMap("document 1", document());
 
 }
 

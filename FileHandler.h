@@ -8,17 +8,17 @@
 
 #include <QObject>
 #include <QTextDocument>
-#include "EditorWidget.h"
+#include <QTextEdit>
 
 class FileHandler : public QObject{
 
     Q_OBJECT
 
 public:
-    static void handleSave(EditorWidget *editorWidget, QTextDocument *document);
-    static void handleLoad(EditorWidget *editorWidget);
-    static void handleLoad(EditorWidget *editorWidget, std::string path);
-    static void loadLast(EditorWidget *editorWidget);
+    static void handleSave(QTextEdit *editorWidget);
+    static void handleLoad(QTextEdit *editorWidget);
+    static void handleLoad(QTextEdit *editorWidget, std::string path);
+    static void loadLast(QTextEdit *editorWidget);
     static void savePathLast(std::string path);
 
 private:

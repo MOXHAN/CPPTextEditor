@@ -8,6 +8,7 @@
 #include <QPushButton>
 #include <iostream>
 #include <QVBoxLayout>
+#include <QFileDialog>
 
 //ctor popup for load on start
 PopUpWindow::PopUpWindow(MainWindow *parent) : QDialog(parent){
@@ -18,7 +19,7 @@ PopUpWindow::PopUpWindow(MainWindow *parent) : QDialog(parent){
     QPushButton *loadButton {new QPushButton("Open most recent file?", this)};
 
     connect(loadButton, &QPushButton::clicked, this, [&] (){
-        FileHandler::loadLast(parent->editorWidget);
+        FileHandler::loadLast(parent->getEditorWidget());
         accept();
     });
 
@@ -38,7 +39,9 @@ PopUpWindow::PopUpWindow(MainWindow *parent, QTextDocument *document) : QDialog(
     QPushButton *saveButton {new QPushButton("Save this file?", this)};
 
     connect(saveButton, &QPushButton::clicked, this, [&] (){
-        FileHandler::handleSave(parent->editorWidget, document);
+        QString fileName = QFileDialog::getSaveFileName(parent,
+                                                        tr("Open Textfile"), "/home", tr("Text Files (*.txt)"));
+        FileHandler::handleSave(parent->getEditorWidget());
         accept();
     });
 

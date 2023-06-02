@@ -6,19 +6,20 @@
 #define CPPTEXTEDITOR_FILEDOCKER_H
 
 #include <QDockWidget>
+#include <QToolBar>
 #include "MainWindow.h"
-#include "DocumentHandler.h"
-
+#include "EditorWidget.h"
 
 class FileDocker : public QDockWidget{
 
 public:
-    explicit FileDocker(QWidget *parent);
+    explicit FileDocker(MainWindow *parent, EditorWidget *editorWidget);
 
     void addButton();
 
 private:
     QToolBar *fileBar;
+    EditorWidget *editorWidget;
 
 };
 
