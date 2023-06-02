@@ -3,9 +3,9 @@
 //
 
 #include "MainWindow.h"
-#include "ToolHandler.h"
+#include "handlerlib/ToolHandler.h"
 #include "EditorWidget.h"
-#include "FileHandler.h"
+#include "handlerlib/FileHandler.h"
 #include "PopUpWindow.h"
 #include "FileDocker.h"
 #include <iostream>

@@ -4,7 +4,7 @@
 
 #include "EditorWidget.h"
 #include "LineNumberArea.h"
-#include "DocumentHandler.h"
+#include "handlerlib/DocumentHandler.h"
 
 EditorWidget::EditorWidget(QWidget *parent) : QTextEdit(parent){
 

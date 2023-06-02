@@ -6,17 +6,22 @@ set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 set(CMAKE_AUTOUIC ON)
 
+add_subdirectory(handlerlib)
+
 find_package(Qt5 COMPONENTS
         Core
         Gui
         Widgets
         REQUIRED)
 
-add_executable(Alpha_Editor main.cpp MainWindow.cpp ToolHandler.cpp EditorWidget.cpp
-        LineNumberArea.cpp FileHandler.cpp PopUpWindow.cpp FileDocker.cpp DocumentHandler.cpp)
+add_executable(Alpha_Editor main.cpp MainWindow.cpp EditorWidget.cpp
+        LineNumberArea.cpp PopUpWindow.cpp FileDocker.cpp)
+
+include_directories(handlerlib)
 
 target_link_libraries(Alpha_Editor
         Qt::Core
         Qt::Gui
         Qt::Widgets
+        handlerlib
         )

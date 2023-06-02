@@ -4,7 +4,7 @@
 
 #include <iostream>
 #include "FileDocker.h"
-#include "DocumentHandler.h"
+#include "handlerlib/DocumentHandler.h"
 
 FileDocker::FileDocker(MainWindow *parent, EditorWidget *editorWidget) : QDockWidget(parent){
 
