@@ -47,8 +47,10 @@ void MainWindow::setupMenuBar() {
     QMenu *Menu = menuBar()->addMenu(tr("&Menu"));
     //Creates Dropdown Menu Items
     QAction *fileQuit {new QAction("Quit", this)};
-    QAction *fileSave = new QAction("save to txt", this);
-    QAction *fileLoad = new QAction("load from txt", this);
+    QAction *fileSave {new QAction("save to txt", this)};
+    QAction *fileLoad {new QAction("load from txt", this)};
+    QAction *fileExportDoc {new QAction("export to .docx", this)};
+
 
     //connect Signals and Slots
     connect(fileQuit, &QAction::triggered, this, [&](){
@@ -62,10 +64,14 @@ void MainWindow::setupMenuBar() {
     connect(fileLoad, &QAction::triggered, this, [this](){
         FileHandler::handleLoad(editorWidget);
     });
+    connect(fileExportDoc, &QAction::triggered, this, [this] () {
+        FileHandler::handleExportDoc(editorWidget);
+    });
     //Add Dropdown Menu item to Menu Item
     Menu->addAction(fileQuit);
     Menu->addAction(fileSave);
     Menu->addAction(fileLoad);
+    Menu->addAction(fileExportDoc);
 
 }
 

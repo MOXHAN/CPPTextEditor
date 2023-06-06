@@ -10,6 +10,11 @@
 #include <QDebug>
 #include <QFileDialog>
 
+std::ofstream& operator<<(std::ofstream& ofs, const QString& qstring){
+    ofs << qstring.toStdString();
+    return ofs;
+}
+
 void FileHandler::handleSave(QTextEdit *editorWidget) {
 
     QString fileName = QFileDialog::getSaveFileName(editorWidget,
@@ -17,7 +22,8 @@ void FileHandler::handleSave(QTextEdit *editorWidget) {
     //create file outstream
     std::ofstream writeToFile {fileName.toStdString()};
     //write contents to txt file
-    writeToFile << editorWidget->document()->toPlainText().toStdString();
+    //writeToFile << editorWidget->document()->toPlainText().toStdString();
+    writeToFile << editorWidget->toHtml();
     //close outstream
     writeToFile.close();
 
@@ -46,7 +52,7 @@ void FileHandler::handleLoad(QTextEdit *editorWidget){
     //convert std to q string
     QString qstring = QString::fromStdString(data);
     //write qstring to document
-    document->setPlainText(qstring);
+    document->setHtml(qstring);
 
     //Logging
     std::cout << "FILE-LOG: successfully loaded file " << fileName.toStdString() << std::endl;
@@ -69,9 +75,7 @@ void FileHandler::handleLoad(QTextEdit *editorWidget, std::string path){
     //get document in editor
     QTextDocument *document = editorWidget->document();
     //write qstring to document
-    document->setPlainText(qstring);
-    //set document to Editor
-    editorWidget->setDocument(document);
+    document->setHtml(qstring);
 
     //Logging
     std::cout << "FILE-LOG: successfully loaded file from path: " << path << std::endl;
@@ -116,5 +120,25 @@ void FileHandler::savePathLast(std::string path){
 
     //Logging
     std::cout << "FILE-LOG: successfully saved path " << path << " as path to previously saved file" << std::endl;
+
+}
+
+void FileHandler::handleExportDoc(QTextEdit *editorWidget) {
+
+    //get name to save file as
+    QString fileName = QFileDialog::getSaveFileName(editorWidget,
+                                                    tr("Open Textfile"), "/home", tr("Text Files (*.docx)"));
+    //create file outstream
+    std::ofstream writeToFile {fileName.toStdString()};
+    //write contents to txt file
+    writeToFile << editorWidget->document()->toPlainText().toStdString();
+    //close outstream
+    writeToFile.close();
+
+    //write path to saved file to "pathlast.txt" to save it for next session
+    savePathLast(fileName.toStdString());
+
+    //Logging
+    std::cout << "FILE-LOG: successfully saved file " << fileName.toStdString() << std::endl;
 
 }
