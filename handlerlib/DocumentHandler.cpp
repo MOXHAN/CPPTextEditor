@@ -28,11 +28,16 @@ void DocumentHandler::addDocumentToMap(std::string key, std::string path) {
     DocumentHandler::documentPathMap[key] = path;
     //Log
     std::cout<<"DOC-LOG: added document path " << path << " to map." << std::endl;
+    std::cout<<"DOC-LOG: current map: " <<std::endl;
+    for(auto &i : documentPathMap){
+        std::cout << "  key: " << i.first << "val: " << i.second << std::endl;
+    }
 }
 
 std::string DocumentHandler::getDocumentPathFromMap(std::string key) {
 
-    return DocumentHandler::documentPathMap[key];
+    std::cout << "Trying to get path for key: " << key << std::endl;
+    return DocumentHandler::documentPathMap.at(key);
 
 }
 

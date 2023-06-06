@@ -74,7 +74,7 @@ void FileHandler::handleLoad(QTextEdit *editorWidget, std::string path){
     editorWidget->setDocument(document);
 
     //Logging
-    std::cout << "FILE-LOG: successfully saved file from path " << path << std::endl;
+    std::cout << "FILE-LOG: successfully loaded file from path: " << path << std::endl;
 }
 
 std::string FileHandler::getPathLastFile() {
@@ -98,7 +98,7 @@ void FileHandler::loadLast(QTextEdit *editorWidget) {
     handleLoad(editorWidget, path);
 
     //Logging
-    std::cout << "FILE-LOG: successfully loaded previous saved file from path " << getPathLastFile << std::endl;
+    std::cout << "FILE-LOG: successfully loaded previous saved file from path: " << getPathLastFile() << std::endl;
 
 }
 

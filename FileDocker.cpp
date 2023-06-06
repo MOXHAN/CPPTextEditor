@@ -37,7 +37,7 @@ void FileDocker::createNewDoc() {
     if (buttonClicked == QMessageBox::AcceptRole) {
         //save current doc to file
         FileHandler::handleSave(editorWidget);
-        //create key for map
+        //create key for map ("document 1", because current docCount is 0)
         std::string key {"document " + std::to_string(DocumentHandler::getDocumentCount() + 1)};
         //add new doc to map
         DocumentHandler::addDocumentToMap(key, FileHandler::getPathLastFile());
@@ -63,13 +63,13 @@ void FileDocker::addButton() {
         addButton();
         //remove plusButton
         //fileBar->removeAction(button);
+        //button->deleteLater();
     });
     //add button to toolbar
     fileBar->addAction(button);
 
     //add modified toolbar widget back to docker widget
     setWidget(fileBar);
-
 };
 
 void FileDocker::addDocButton() {
@@ -81,11 +81,10 @@ void FileDocker::addDocButton() {
 
     connect(button, &QAction::triggered, this, [&] () {
         //get path of file to load
-        std::string path  {DocumentHandler::getDocumentPathFromMap(buttonText.toStdString())};
+        std::string path {DocumentHandler::getDocumentPathFromMap("document " + std::to_string(DocumentHandler::getDocumentCount()))};
         //load file
         FileHandler::handleLoad(editorWidget, path);
     });
-
 
     fileBar->addAction(button);
     setWidget(fileBar);

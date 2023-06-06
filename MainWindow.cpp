@@ -30,9 +30,9 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent){
     setCentralWidget(editorWidget);
 
     //Create Instance of FileDocker
-    //FileDocker *fileDocker = new FileDocker(this, editorWidget);
+    FileDocker *fileDocker = new FileDocker(this, editorWidget);
     //Set DockerWidget
-    //addDockWidget(Qt::TopDockWidgetArea, fileDocker);
+    addDockWidget(Qt::TopDockWidgetArea, fileDocker);
 
     //Setup menuBar
     setupMenuBar();
