@@ -30,9 +30,9 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent){
     setCentralWidget(editorWidget);
 
     //Create Instance of FileDocker
-    FileDocker *fileDocker = new FileDocker(this, editorWidget);
+    //FileDocker *fileDocker = new FileDocker(this, editorWidget);
     //Set DockerWidget
-    addDockWidget(Qt::TopDockWidgetArea, fileDocker);
+    //addDockWidget(Qt::TopDockWidgetArea, fileDocker);
 
     //Setup menuBar
     setupMenuBar();
@@ -85,22 +85,23 @@ void MainWindow::setupToolBar() {
     QAction *bold = new QAction("B", this);
     //Turn it into checkable button
     bold->setCheckable(true);
-    //Add Button to toolbar
     toolbar->addAction(bold);
 
     //Create italic Button for toolbar
     QAction *italic = new QAction("K", this);
     //Turn it into checkable button
     italic->setCheckable(true);
-    //Add Button to toolbar
     toolbar->addAction(italic);
 
     //Create marker Button for toolbar
     QAction *marker = new QAction("Yellow", this);
     //Turn it into checkable button
     marker->setCheckable(true);
-    //Add Button to toolbar
     toolbar->addAction(marker);
+
+    //Create search/find Button for toolbar
+    QAction *search {new QAction("Search", this)};
+    toolbar->addAction(search);
 
     //Connect Signals and Slots
     connect(underline, &QAction::triggered, this, [this, underline] (){
@@ -115,5 +116,7 @@ void MainWindow::setupToolBar() {
     connect(marker, &QAction::triggered, this, [this, marker] (){
         ToolHandler::handleMarker(editorWidget, marker);
     });
-    
+    connect(search,&QAction::triggered, this, [this] () {
+       ToolHandler::handleSearch(editorWidget);
+    });
 };

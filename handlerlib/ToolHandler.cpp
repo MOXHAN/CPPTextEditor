@@ -2,7 +2,9 @@
 // Created by maximhansen on 20.05.2023.
 //
 
+#include <QInputDialog>
 #include "ToolHandler.h"
+#include <QTextBlock>
 
 void ToolHandler::handleUnderline(QTextEdit *editorWidget, QAction *underline) {
 
@@ -75,3 +77,25 @@ void ToolHandler::handleMarker(QTextEdit *editorWidget, QAction *marker) {
         editorWidget->setTextBackgroundColor(color);
     }
 }
+
+void ToolHandler::handleSearch(QTextEdit *editorWidget) {
+
+    //popup to ask for string to search for
+    bool ok;
+    QString searchText = QInputDialog::getText(editorWidget, "Enter Text", "Enter search string:", QLineEdit::Normal, QString(), &ok);
+
+    //get doc in editorWidget
+    QTextDocument *document {editorWidget->document()};
+    //create cursor at begin of doc
+    QTextCursor cursorBegin {document->begin()};
+    QTextCursor cursor;
+
+    if (ok && !searchText.isEmpty()) {
+        //search for new string in doc
+        cursor = document->find(searchText, cursorBegin);
+        //highlight found string
+        editorWidget->setTextCursor(cursor);
+    } else {
+        
+    }
+};
