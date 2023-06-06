@@ -5,6 +5,7 @@
 #include <QInputDialog>
 #include "ToolHandler.h"
 #include <QTextBlock>
+#include <iostream>
 
 QString ToolHandler::lastFoundString;
 QTextCursor ToolHandler::lastFoundStringCursor;
@@ -25,6 +26,9 @@ void ToolHandler::handleUnderline(QTextEdit *editorWidget, QAction *underline) {
 
     //Set button checked/unchecked
     underline->setChecked(font.underline());
+
+    //Logging
+    std::cout << "TOOL-LOG: successfully marked selection as underline" << std::endl;
 }
 
 void ToolHandler::handleBold(QTextEdit *editorWidget, QAction *bold) {
@@ -43,6 +47,9 @@ void ToolHandler::handleBold(QTextEdit *editorWidget, QAction *bold) {
 
     //Set button checked/unchecked
     bold->setChecked(font.bold());
+
+    //Logging
+    std::cout << "TOOL-LOG: successfully marked selection as bold" << std::endl;
 }
 
 void ToolHandler::handleItalic(QTextEdit *editorWidget, QAction *italic) {
@@ -61,6 +68,9 @@ void ToolHandler::handleItalic(QTextEdit *editorWidget, QAction *italic) {
 
     //Set button checked/unchecked
     italic->setChecked(font.italic());
+
+    //Logging
+    std::cout << "TOOL-LOG: successfully marked selection as italic" << std::endl;
 }
 
 void ToolHandler::handleMarker(QTextEdit *editorWidget, QAction *marker) {
@@ -79,6 +89,9 @@ void ToolHandler::handleMarker(QTextEdit *editorWidget, QAction *marker) {
         //Set backgroundcolor to changed color
         editorWidget->setTextBackgroundColor(color);
     }
+
+    //Logging
+    std::cout << "TOOL-LOG: successfully highlighted selection yellow" << std::endl;
 }
 
 void ToolHandler::handleSearch(QTextEdit *editorWidget) {
@@ -113,5 +126,8 @@ void ToolHandler::handleSearch(QTextEdit *editorWidget) {
         lastFoundString = searchText;
         //save cursor at last found string
         lastFoundStringCursor = cursor;
+
+        //Logging
+        std::cout << "TOOL-LOG: successfully found searched string: " << searchText.toStdString() << std::endl;
     }
 };

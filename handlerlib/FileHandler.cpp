@@ -24,6 +24,9 @@ void FileHandler::handleSave(QTextEdit *editorWidget) {
     //write path to saved file to "pathlast.txt" to save it for next session
     savePathLast(fileName.toStdString());
 
+    //Logging
+    std::cout << "FILE-LOG: successfully saved file " << fileName.toStdString() << std::endl;
+
 }
 
 void FileHandler::handleLoad(QTextEdit *editorWidget){
@@ -44,6 +47,9 @@ void FileHandler::handleLoad(QTextEdit *editorWidget){
     QString qstring = QString::fromStdString(data);
     //write qstring to document
     document->setPlainText(qstring);
+
+    //Logging
+    std::cout << "FILE-LOG: successfully loaded file " << fileName.toStdString() << std::endl;
 
 }
 
@@ -66,6 +72,9 @@ void FileHandler::handleLoad(QTextEdit *editorWidget, std::string path){
     document->setPlainText(qstring);
     //set document to Editor
     editorWidget->setDocument(document);
+
+    //Logging
+    std::cout << "FILE-LOG: successfully saved file from path " << path << std::endl;
 }
 
 std::string FileHandler::getPathLastFile() {
@@ -88,6 +97,9 @@ void FileHandler::loadLast(QTextEdit *editorWidget) {
     //load content into editorWidget
     handleLoad(editorWidget, path);
 
+    //Logging
+    std::cout << "FILE-LOG: successfully loaded previous saved file from path " << getPathLastFile << std::endl;
+
 }
 
 //this function saves the given string (path) into a separate txt file
@@ -101,5 +113,8 @@ void FileHandler::savePathLast(std::string path){
     writeToFile << path;
     //close outstream
     writeToFile.close();
+
+    //Logging
+    std::cout << "FILE-LOG: successfully saved path " << path << " as path to previously saved file" << std::endl;
 
 }
