@@ -15,6 +15,8 @@ class DocumentHandler {
 
 public:
 
+    //delete ctor
+    DocumentHandler() = delete;
     static void addDocumentToMap(std::string key);
     static void addDocumentToMap(std::string key, std::string path);
     static std::string getDocumentPathFromMap(std::string key);

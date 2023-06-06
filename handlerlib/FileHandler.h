@@ -20,10 +20,10 @@ public:
     static void handleLoad(QTextEdit *editorWidget, std::string path);
     static void loadLast(QTextEdit *editorWidget);
     static void savePathLast(std::string path);
+    static std::string getPathLastFile();
 
 private:
 
-    static std::string getPathLastFile();
 
 };
 

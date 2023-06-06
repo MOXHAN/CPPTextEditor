@@ -15,6 +15,8 @@ class FileDocker : public QDockWidget{
 public:
     explicit FileDocker(MainWindow *parent, EditorWidget *editorWidget);
 
+    void createNewDoc();
+    void addDocButton();
     void addButton();
 
 private:
