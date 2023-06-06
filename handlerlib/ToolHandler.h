@@ -21,6 +21,10 @@ public slots:
     static void handleMarker(QTextEdit *editorWidget, QAction *marker);
     static void handleSearch(QTextEdit *editorWidget);
 
+private:
+    static QString lastFoundString;
+    static QTextCursor lastFoundStringCursor;
+
 };
 
 
