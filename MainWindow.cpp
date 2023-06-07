@@ -50,6 +50,7 @@ void MainWindow::setupMenuBar() {
     QAction *fileSave {new QAction("save to txt", this)};
     QAction *fileLoad {new QAction("load from txt", this)};
     QAction *fileExportDoc {new QAction("export to .docx", this)};
+    QAction *dump {new QAction("dump content", this)};
 
 
     //connect Signals and Slots
@@ -67,11 +68,17 @@ void MainWindow::setupMenuBar() {
     connect(fileExportDoc, &QAction::triggered, this, [this] () {
         FileHandler::handleExportDoc(editorWidget);
     });
+    connect(dump, &QAction::triggered, this,[this] () {
+        QString text = editorWidget->document()->toPlainText();
+        ToolHandler::handleDump(std::move(text));
+        editorWidget->document()->clear();
+    });
     //Add Dropdown Menu item to Menu Item
     Menu->addAction(fileQuit);
     Menu->addAction(fileSave);
     Menu->addAction(fileLoad);
     Menu->addAction(fileExportDoc);
+    Menu->addAction(dump);
 
 }
 

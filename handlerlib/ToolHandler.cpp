@@ -10,6 +10,11 @@
 QString ToolHandler::lastFoundString;
 QTextCursor ToolHandler::lastFoundStringCursor;
 
+std::ostream& operator<<(std::ostream& out, const QString& qstring){
+    out << qstring.toStdString();
+    return out;
+}
+
 void ToolHandler::handleUnderline(QTextEdit *editorWidget, QAction *underline) {
 
     //Receive current cursor - format and font
@@ -130,4 +135,11 @@ void ToolHandler::handleSearch(QTextEdit *editorWidget) {
         //Logging
         std::cout << "TOOL-LOG: successfully found searched string: " << searchText.toStdString() << std::endl;
     }
+};
+
+//Dumps current text in editors document onto the console
+void ToolHandler::handleDump(QString text) {
+
+  std::cout << text << std::endl;
+
 };

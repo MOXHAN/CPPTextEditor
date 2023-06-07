@@ -20,6 +20,7 @@ public slots:
     static void handleItalic(QTextEdit *editorWidget, QAction *italic);
     static void handleMarker(QTextEdit *editorWidget, QAction *marker);
     static void handleSearch(QTextEdit *editorWidget);
+    static void handleDump(QString text);
 
 private:
     static QString lastFoundString;
