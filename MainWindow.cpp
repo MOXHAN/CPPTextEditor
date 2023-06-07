@@ -49,7 +49,7 @@ void MainWindow::setupMenuBar() {
     QAction *fileQuit {new QAction("Quit", this)};
     QAction *fileSave {new QAction("save to txt", this)};
     QAction *fileLoad {new QAction("load from txt", this)};
-    QAction *fileExportDoc {new QAction("export to .docx", this)};
+    QAction *fileExportDoc {new QAction("export to PDF", this)};
     QAction *dump {new QAction("dump content", this)};
 
 
@@ -66,7 +66,7 @@ void MainWindow::setupMenuBar() {
         FileHandler::handleLoad(editorWidget);
     });
     connect(fileExportDoc, &QAction::triggered, this, [this] () {
-        FileHandler::handleExportDoc(editorWidget);
+        FileHandler::handleExportPdf(editorWidget);
     });
     connect(dump, &QAction::triggered, this,[this] () {
         QString text = editorWidget->document()->toPlainText();

@@ -21,7 +21,7 @@ public:
     static void loadLast(QTextEdit *editorWidget);
     static void savePathLast(std::string path);
     static std::string getPathLastFile();
-    static void handleExportDoc(QTextEdit *editorWidget);
+    static void handleExportPdf(QTextEdit *editorWidget);
 
 private:
 

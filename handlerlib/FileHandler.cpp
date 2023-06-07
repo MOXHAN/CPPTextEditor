@@ -9,6 +9,8 @@
 #include <iostream>
 #include <QDebug>
 #include <QFileDialog>
+#include <QPdfWriter>
+#include <QPainter>
 
 std::ofstream& operator<<(std::ofstream& ofs, const QString& qstring){
     ofs << qstring.toStdString();
@@ -128,22 +130,22 @@ void FileHandler::savePathLast(std::string path){
 
 }
 
-void FileHandler::handleExportDoc(QTextEdit *editorWidget) {
+void FileHandler::handleExportPdf(QTextEdit *editorWidget) {
 
     //get name to save file as
     QString fileName = QFileDialog::getSaveFileName(editorWidget,
-                                                    tr("Open Textfile"), "/home", tr("Text Files (*.docx)"));
-    //create file outstream
-    std::ofstream writeToFile {fileName.toStdString()};
-    //write contents to txt file
-    writeToFile << editorWidget->document()->toPlainText().toStdString();
-    //close outstream
-    writeToFile.close();
+                                                    tr("Open Textfile"), "/home", tr("Pdf Files (*.pdf)"));
+    QString text = editorWidget->document()->toPlainText();
 
-    //write path to saved file to "pathlast.txt" to save it for next session
-    savePathLast(fileName.toStdString());
+    QPdfWriter pdfWriter(fileName);
 
-    //Logging
-    std::cout << "FILE-LOG: successfully saved file " << fileName.toStdString() << std::endl;
+    pdfWriter.setPageSize(QPageSize::A4);
+    pdfWriter.setPageOrientation(QPageLayout::Portrait);
+
+    QPainter painter(&pdfWriter);
+    painter.drawText(QRectF(0, 0, pdfWriter.width(), pdfWriter.height()), text);
+
+    painter.end();
+    pdfWriter.deleteLater();
 
 }
