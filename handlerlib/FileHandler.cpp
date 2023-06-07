@@ -23,7 +23,12 @@ void FileHandler::handleSave(QTextEdit *editorWidget) {
     std::ofstream writeToFile {fileName.toStdString()};
     //write contents to txt file
     //writeToFile << editorWidget->document()->toPlainText().toStdString();
-    writeToFile << editorWidget->toHtml();
+    QString text = editorWidget->toHtml();
+    //removing unwanted html background coloring
+    text.remove(" background-color:#ffffff;");
+    text.remove(" background-color:#d3d3d3;");
+
+    writeToFile << text;
     //close outstream
     writeToFile.close();
 
