@@ -10,6 +10,7 @@
 #include "FileDocker.h"
 #include <iostream>
 #include <QFileDialog>
+#include "handlerlib/TableHandler.h"
 
 
 //Close window when window is exited
@@ -115,8 +116,21 @@ void MainWindow::setupToolBar() {
     QAction *search {new QAction("Search", this)};
     toolbar->addAction(search);
 
+    //create button for undo
     QAction *undo {new QAction("undo", this)};
     toolbar->addAction(undo);
+
+    //button to create table
+    QAction *createTable {new QAction("new Table", this)};
+    toolbar->addAction(createTable);
+
+    //button to add rows to table
+    QAction *addRow {new QAction("add row", this)};
+    toolbar->addAction(addRow);
+
+    //button to add columns to table
+    QAction *addCol {new QAction("add column", this)};
+    toolbar->addAction(addCol);
 
     //Connect Signals and Slots
     connect(underline, &QAction::triggered, this, [this, underline] (){
@@ -136,5 +150,14 @@ void MainWindow::setupToolBar() {
     });
     connect(undo, &QAction::triggered, this, [this] () {
        ToolHandler::handleUndo(editorWidget);
+    });
+    connect(createTable, &QAction::triggered, this, [this] () {
+        TableHandler::createTable(editorWidget);
+    });
+    connect(addRow, &QAction::triggered, this, [this] () {
+        TableHandler::addRow(editorWidget);
+    });
+    connect(addCol, &QAction::triggered, this, [this] () {
+        TableHandler::addCol(editorWidget);
     });
 };

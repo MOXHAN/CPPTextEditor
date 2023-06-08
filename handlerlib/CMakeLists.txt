@@ -1,4 +1,4 @@
-add_library(handlerlib FileHandler.cpp ToolHandler.cpp DocumentHandler.cpp)
+add_library(handlerlib FileHandler.cpp ToolHandler.cpp DocumentHandler.cpp TableHandler.cpp)
 
 find_package(Qt5 COMPONENTS
         Core

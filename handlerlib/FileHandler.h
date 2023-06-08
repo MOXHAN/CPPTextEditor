@@ -23,9 +23,6 @@ public:
     static std::string getPathLastFile();
     static void handleExportPdf(QTextEdit *editorWidget);
 
-private:
-
-
 };
 
 
