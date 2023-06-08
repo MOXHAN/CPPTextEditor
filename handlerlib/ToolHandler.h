@@ -20,11 +20,15 @@ public slots:
     static void handleItalic(QTextEdit *editorWidget, QAction *italic);
     static void handleMarker(QTextEdit *editorWidget, QAction *marker);
     static void handleSearch(QTextEdit *editorWidget);
-    static void handleDump(QString text);
+    static void handleDump(QString text, QTextEdit *editorWidget);
+    static void handleUndo(QTextEdit *editorWidget);
 
 private:
     static QString lastFoundString;
     static QTextCursor lastFoundStringCursor;
+
+    template <typename T>
+    static void print(const T& text);
 
 };
 

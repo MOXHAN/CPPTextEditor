@@ -70,8 +70,7 @@ void MainWindow::setupMenuBar() {
     });
     connect(dump, &QAction::triggered, this,[this] () {
         QString text = editorWidget->document()->toPlainText();
-        ToolHandler::handleDump(std::move(text));
-        editorWidget->document()->clear();
+        ToolHandler::handleDump(std::move(text), editorWidget);
     });
     //Add Dropdown Menu item to Menu Item
     Menu->addAction(fileQuit);
@@ -116,6 +115,9 @@ void MainWindow::setupToolBar() {
     QAction *search {new QAction("Search", this)};
     toolbar->addAction(search);
 
+    QAction *undo {new QAction("undo", this)};
+    toolbar->addAction(undo);
+
     //Connect Signals and Slots
     connect(underline, &QAction::triggered, this, [this, underline] (){
         ToolHandler::handleUnderline(editorWidget, underline);
@@ -131,5 +133,8 @@ void MainWindow::setupToolBar() {
     });
     connect(search,&QAction::triggered, this, [this] () {
        ToolHandler::handleSearch(editorWidget);
+    });
+    connect(undo, &QAction::triggered, this, [this] () {
+       ToolHandler::handleUndo(editorWidget);
     });
 };

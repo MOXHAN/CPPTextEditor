@@ -15,6 +15,13 @@ std::ostream& operator<<(std::ostream& out, const QString& qstring){
     return out;
 }
 
+template<typename T>
+void ToolHandler::print(const T &text) {
+
+    std::cout << text << std::endl;
+
+};
+
 void ToolHandler::handleUnderline(QTextEdit *editorWidget, QAction *underline) {
 
     //Receive current cursor - format and font
@@ -33,7 +40,7 @@ void ToolHandler::handleUnderline(QTextEdit *editorWidget, QAction *underline) {
     underline->setChecked(font.underline());
 
     //Logging
-    std::cout << "TOOL-LOG: successfully marked selection as underline" << std::endl;
+    print("TOOL-LOG: successfully marked selection as underline");
 }
 
 void ToolHandler::handleBold(QTextEdit *editorWidget, QAction *bold) {
@@ -54,7 +61,7 @@ void ToolHandler::handleBold(QTextEdit *editorWidget, QAction *bold) {
     bold->setChecked(font.bold());
 
     //Logging
-    std::cout << "TOOL-LOG: successfully marked selection as bold" << std::endl;
+    print("TOOL-LOG: successfully marked selection as bold");
 }
 
 void ToolHandler::handleItalic(QTextEdit *editorWidget, QAction *italic) {
@@ -75,7 +82,7 @@ void ToolHandler::handleItalic(QTextEdit *editorWidget, QAction *italic) {
     italic->setChecked(font.italic());
 
     //Logging
-    std::cout << "TOOL-LOG: successfully marked selection as italic" << std::endl;
+    print("TOOL-LOG: successfully marked selection as italic");
 }
 
 void ToolHandler::handleMarker(QTextEdit *editorWidget, QAction *marker) {
@@ -96,7 +103,7 @@ void ToolHandler::handleMarker(QTextEdit *editorWidget, QAction *marker) {
     }
 
     //Logging
-    std::cout << "TOOL-LOG: successfully highlighted selection yellow" << std::endl;
+    print("TOOL-LOG: successfully highlighted selection yellow");
 }
 
 void ToolHandler::handleSearch(QTextEdit *editorWidget) {
@@ -133,13 +140,21 @@ void ToolHandler::handleSearch(QTextEdit *editorWidget) {
         lastFoundStringCursor = cursor;
 
         //Logging
-        std::cout << "TOOL-LOG: successfully found searched string: " << searchText.toStdString() << std::endl;
+        print("TOOL-LOG: successfully found searched string: " + searchText.toStdString());
     }
 };
 
 //Dumps current text in editors document onto the console
-void ToolHandler::handleDump(QString text) {
+void ToolHandler::handleDump(QString text, QTextEdit *editorWidget) {
 
-  std::cout << text << std::endl;
+  print(text);
+  editorWidget->document()->clear();
+
+};
+
+void ToolHandler::handleUndo(QTextEdit *editorWidget) {
+
+    std::cout << "TOOL-LOG: Undo available: " << editorWidget->document()->isUndoAvailable() << std::endl;
+    editorWidget->document()->undo();
 
 };
