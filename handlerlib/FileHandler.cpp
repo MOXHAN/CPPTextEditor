@@ -135,16 +135,18 @@ void FileHandler::handleExportPdf(QTextEdit *editorWidget) {
     //get name to save file as
     QString fileName = QFileDialog::getSaveFileName(editorWidget,
                                                     tr("Open Textfile"), "/home", tr("Pdf Files (*.pdf)"));
+    //get current text in editorWidget
     QString text = editorWidget->document()->toPlainText();
-
+    //create pdfWrioter instance for file
     QPdfWriter pdfWriter(fileName);
-
+    //set page size and orientation
     pdfWriter.setPageSize(QPageSize::A4);
     pdfWriter.setPageOrientation(QPageLayout::Portrait);
-
+    //create painter instance, set font and write text to file
     QPainter painter(&pdfWriter);
+    painter.setFont(QFont("Arial", 12));
     painter.drawText(QRectF(0, 0, pdfWriter.width(), pdfWriter.height()), text);
-
+    //end/delete painter and delete pdfwriter
     painter.end();
     pdfWriter.deleteLater();
 
