@@ -2,14 +2,16 @@
 // Created by maximhansen on 16.05.2023.
 //
 
+#include <QFileDialog>
+#include <QMenuBar>
+#include <QToolBar>
+#include <iostream>
 #include "MainWindow.h"
 #include "handlerlib/ToolHandler.h"
 #include "EditorWidget.h"
 #include "handlerlib/FileHandler.h"
 #include "PopUpWindow.h"
 #include "FileDocker.h"
-#include <iostream>
-#include <QFileDialog>
 #include "handlerlib/TableHandler.h"
 
 
@@ -31,7 +33,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent){
     setCentralWidget(editorWidget);
 
     //Create Instance of FileDocker
-    FileDocker *fileDocker = new FileDocker(this, editorWidget);
+    FileDocker *fileDocker {new FileDocker(this, editorWidget)};
     //Set DockerWidget
     addDockWidget(Qt::TopDockWidgetArea, fileDocker);
 
@@ -45,9 +47,10 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent){
 void MainWindow::setupMenuBar() {
 
     //menuBar() returns MainWindows menubar, addMenu adds a Menu item
-    QMenu *Menu = menuBar()->addMenu(tr("&Menu"));
+    QMenu *Menu {menuBar()->addMenu(tr("&Menu"))};
     //Creates Dropdown Menu Items
     QAction *fileQuit {new QAction("Quit", this)};
+    //std::unique_ptr<QAction> quit;
     QAction *fileSave {new QAction("save to txt", this)};
     QAction *fileLoad {new QAction("load from txt", this)};
     QAction *fileExportDoc {new QAction("export to PDF", this)};
@@ -85,29 +88,29 @@ void MainWindow::setupMenuBar() {
 void MainWindow::setupToolBar() {
 
     //create toolbar
-    QToolBar *toolbar = addToolBar("MyToolBar");
+    QToolBar *toolbar {addToolBar("MyToolBar")};
 
     //Create Underline Button for toolbar
-    QAction *underline = new QAction("U", this);
+    QAction *underline {new QAction("U", this)};
     //Turn it into checkable button
     underline->setCheckable(true);
     //Add Button to toolbar
     toolbar->addAction(underline);
 
     //Create bold Button for toolbar
-    QAction *bold = new QAction("B", this);
+    QAction *bold {new QAction("B", this)};
     //Turn it into checkable button
     bold->setCheckable(true);
     toolbar->addAction(bold);
 
     //Create italic Button for toolbar
-    QAction *italic = new QAction("K", this);
+    QAction *italic {new QAction("K", this)};
     //Turn it into checkable button
     italic->setCheckable(true);
     toolbar->addAction(italic);
 
     //Create marker Button for toolbar
-    QAction *marker = new QAction("Yellow", this);
+    QAction *marker {new QAction("Yellow", this)};
     //Turn it into checkable button
     marker->setCheckable(true);
     toolbar->addAction(marker);

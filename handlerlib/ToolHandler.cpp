@@ -3,6 +3,7 @@
 //
 
 #include <QInputDialog>
+#include <QColor>
 #include "ToolHandler.h"
 #include <QTextBlock>
 #include <iostream>
@@ -25,9 +26,9 @@ void ToolHandler::print(const T &text) {
 void ToolHandler::handleUnderline(QTextEdit *editorWidget, QAction *underline) {
 
     //Receive current cursor - format and font
-    QTextCursor cursor = editorWidget->textCursor();
-    QTextCharFormat format = cursor.charFormat();
-    QFont font = format.font();
+    QTextCursor cursor {editorWidget->textCursor()};
+    QTextCharFormat format {cursor.charFormat()};
+    QFont font {format.font()};
 
     //Set font to underline/not underline depending on current state
     font.setUnderline(!font.underline());
@@ -46,9 +47,9 @@ void ToolHandler::handleUnderline(QTextEdit *editorWidget, QAction *underline) {
 void ToolHandler::handleBold(QTextEdit *editorWidget, QAction *bold) {
 
     //Receive current cursor - format and font
-    QTextCursor cursor = editorWidget->textCursor();
-    QTextCharFormat format = cursor.charFormat();
-    QFont font = format.font();
+    QTextCursor cursor {editorWidget->textCursor()};
+    QTextCharFormat format {cursor.charFormat()};
+    QFont font {format.font()};
 
     //Set font to bold/not bold depending on current state
     font.setBold(!font.bold());
@@ -69,7 +70,7 @@ void ToolHandler::handleItalic(QTextEdit *editorWidget, QAction *italic) {
     //Receive current cursor - format and font
     QTextCursor cursor {editorWidget->textCursor()};
     QTextCharFormat format {cursor.charFormat()};
-    QFont font = format.font();
+    QFont font {format.font()};
 
     //Set font to italic/not italic depending on current state
     font.setItalic(!font.italic());
@@ -88,7 +89,7 @@ void ToolHandler::handleItalic(QTextEdit *editorWidget, QAction *italic) {
 void ToolHandler::handleMarker(QTextEdit *editorWidget, QAction *marker) {
 
     //get current color
-    QColor color = editorWidget->textColor();
+    QColor color {editorWidget->textColor()};
 
     if(marker->isChecked()){
         //Change rgb value
@@ -110,7 +111,7 @@ void ToolHandler::handleSearch(QTextEdit *editorWidget) {
 
     //popup to ask for string to search for
     bool ok;
-    QString searchText = QInputDialog::getText(editorWidget, "Enter Text", "Enter search string:", QLineEdit::Normal, QString(lastFoundString), &ok);
+    QString searchText {QInputDialog::getText(editorWidget, "Enter Text", "Enter search string:", QLineEdit::Normal, QString(lastFoundString), &ok)};
 
     //get doc in editorWidget
     QTextDocument *document {editorWidget->document()};

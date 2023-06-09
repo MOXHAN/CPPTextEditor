@@ -31,7 +31,7 @@ void FileDocker::createNewDoc() {
     saveDialog.addButton("Save", QMessageBox::AcceptRole);
     saveDialog.addButton("Cancel  ", QMessageBox::RejectRole);
     // Execute the message box and capture the clicked button
-    int buttonClicked = saveDialog.exec();
+    int buttonClicked {saveDialog.exec()};
 
     // Check which button was clicked
     if (buttonClicked == QMessageBox::AcceptRole) {
@@ -75,7 +75,7 @@ void FileDocker::addButton() {
 void FileDocker::addDocButton() {
 
     //text for button dependend on current amount of docs
-    QString buttonText = "document " + QString::fromStdString(std::to_string(DocumentHandler::getDocumentCount()));
+    QString buttonText {"document " + QString::fromStdString(std::to_string(DocumentHandler::getDocumentCount()))};
     //create action/button for given document
     QAction *button {new QAction(buttonText, this)};
 

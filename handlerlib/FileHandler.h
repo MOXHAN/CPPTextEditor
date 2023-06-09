@@ -7,7 +7,6 @@
 
 
 #include <QObject>
-#include <QTextDocument>
 #include <QTextEdit>
 
 class FileHandler : public QObject{

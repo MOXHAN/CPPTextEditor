@@ -7,10 +7,10 @@
 #include <sstream>
 #include <string>
 #include <iostream>
-#include <QDebug>
 #include <QFileDialog>
 #include <QPdfWriter>
 #include <QPainter>
+#include <QTextDocument>
 
 std::ofstream& operator<<(std::ofstream& ofs, const QString& qstring){
     ofs << qstring.toStdString();
@@ -19,13 +19,13 @@ std::ofstream& operator<<(std::ofstream& ofs, const QString& qstring){
 
 void FileHandler::handleSave(QTextEdit *editorWidget) {
 
-    QString fileName = QFileDialog::getSaveFileName(editorWidget,
-                                                    tr("Open Textfile"), "/home", tr("Text Files (*.txt)"));
+    QString fileName {QFileDialog::getSaveFileName(editorWidget,
+                                                    tr("Open Textfile"), "/home", tr("Text Files (*.txt)"))};
     //create file outstream
     std::ofstream writeToFile {fileName.toStdString()};
     //write contents to txt file
     //writeToFile << editorWidget->document()->toPlainText().toStdString();
-    QString text = editorWidget->toHtml();
+    QString text {editorWidget->toHtml()};
     //removing unwanted html background coloring
     text.remove(" background-color:#ffffff;");
     text.remove(" background-color:#d3d3d3;");
@@ -44,8 +44,8 @@ void FileHandler::handleSave(QTextEdit *editorWidget) {
 
 void FileHandler::handleLoad(QTextEdit *editorWidget){
 
-    QString fileName = QFileDialog::getOpenFileName(editorWidget,
-                                            tr("Open Textfile"), "/home", tr("Text Files (*.txt)"));
+    QString fileName {QFileDialog::getOpenFileName(editorWidget,
+                                            tr("Open Textfile"), "/home", tr("Text Files (*.txt)"))};
     //create file instream
     std::ifstream readFromFile {fileName.toStdString()};
     //Declare std string for read and qstring for write to document
@@ -55,9 +55,9 @@ void FileHandler::handleLoad(QTextEdit *editorWidget){
     ss << readFromFile.rdbuf();
     data = ss.str();
 
-    QTextDocument *document = editorWidget->document();
+    QTextDocument *document {editorWidget->document()};
     //convert std to q string
-    QString qstring = QString::fromStdString(data);
+    QString qstring {QString::fromStdString(data)};
     //write qstring to document
     document->setHtml(qstring);
 
@@ -78,9 +78,9 @@ void FileHandler::handleLoad(QTextEdit *editorWidget, std::string path){
     data = ss.str();
 
     //convert std to q string
-    QString qstring = QString::fromStdString(data);
+    QString qstring {QString::fromStdString(data)};
     //get document in editor
-    QTextDocument *document = editorWidget->document();
+    QTextDocument *document {editorWidget->document()};
     //write qstring to document
     document->setHtml(qstring);
 
@@ -133,10 +133,10 @@ void FileHandler::savePathLast(std::string path){
 void FileHandler::handleExportPdf(QTextEdit *editorWidget) {
 
     //get name to save file as
-    QString fileName = QFileDialog::getSaveFileName(editorWidget,
-                                                    tr("Open Textfile"), "/home", tr("Pdf Files (*.pdf)"));
+    QString fileName {QFileDialog::getSaveFileName(editorWidget,
+                                                    tr("Open Textfile"), "/home", tr("Pdf Files (*.pdf)"))};
     //get current text in editorWidget
-    QString text = editorWidget->document()->toPlainText();
+    QString text {editorWidget->document()->toPlainText()};
     //create pdfWrioter instance for file
     QPdfWriter pdfWriter(fileName);
     //set page size and orientation

@@ -6,10 +6,9 @@
 #define CPPTEXTEDITOR_TABLEHANDLER_H
 
 
-#include <QObject>
 #include <QTextEdit>
 
-class TableHandler : public QObject{
+class TableHandler {
 
 public:
 

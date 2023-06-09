@@ -39,8 +39,8 @@ PopUpWindow::PopUpWindow(MainWindow *parent, QTextDocument *document) : QDialog(
     QPushButton *saveButton {new QPushButton("Save this file?", this)};
 
     connect(saveButton, &QPushButton::clicked, this, [&] (){
-        QString fileName = QFileDialog::getSaveFileName(parent,
-                                                        tr("Open Textfile"), "/home", tr("Text Files (*.txt)"));
+        QString fileName {QFileDialog::getSaveFileName(parent,
+                                                        tr("Open Textfile"), "/home", tr("Text Files (*.txt)"))};
         FileHandler::handleSave(parent->getEditorWidget());
         accept();
     });

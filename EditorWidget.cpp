@@ -57,7 +57,7 @@ void EditorWidget::updateLineNumberArea()
     // to grab the information from "sliderPosition()" and "contentsRect()".
     // See the necessary connections used (Class constructor implementation part).
 
-    QRect rect =  this->contentsRect();
+    QRect rect {this->contentsRect()};
     lineNumberArea->update(0, rect.y(), lineNumberArea->width(), rect.height());
 
     int dy = this->verticalScrollBar()->sliderPosition();
@@ -76,7 +76,7 @@ void EditorWidget::resizeEvent(QResizeEvent *e)
 {
     QTextEdit::resizeEvent(e);
 
-    QRect cr = this->contentsRect();
+    QRect cr {this->contentsRect()};
     lineNumberArea->setGeometry(QRect(cr.left(), cr.top(), lineNumberAreaWidth, cr.height()));
 }
 
@@ -89,17 +89,17 @@ int EditorWidget::getFirstVisibleBlockId()
     // Costly way of doing but since "blockBoundingGeometry(...)" doesn't
     // exists for "QTextEdit"...
 
-    QTextCursor curs = QTextCursor(this->document());
+    QTextCursor curs {QTextCursor(this->document())};
     curs.movePosition(QTextCursor::Start);
     for(int i=0; i < this->document()->blockCount(); ++i)
     {
-        QTextBlock block = curs.block();
+        QTextBlock block {curs.block()};
 
-        QRect r1 = this->viewport()->geometry();
-        QRect r2 = this->document()->documentLayout()->blockBoundingRect(block).translated(
+        QRect r1 {this->viewport()->geometry()};
+        QRect r2 {this->document()->documentLayout()->blockBoundingRect(block).translated(
                 this->viewport()->geometry().x(), this->viewport()->geometry().y() - (
                         this->verticalScrollBar()->sliderPosition()
-                ) ).toRect();
+                ) ).toRect()};
 
         if (r1.contains(r2, true)) { return i; }
 
@@ -115,13 +115,13 @@ void EditorWidget::lineNumberAreaPaintEvent(QPaintEvent *event)
 
     QPainter painter(lineNumberArea);
     painter.fillRect(event->rect(), Qt::lightGray);
-    int blockNumber = this->getFirstVisibleBlockId();
+    int blockNumber {this->getFirstVisibleBlockId()};
 
-    QTextBlock block = this->document()->findBlockByNumber(blockNumber);
-    QTextBlock prev_block = (blockNumber > 0) ? this->document()->findBlockByNumber(blockNumber-1) : block;
-    int translate_y = (blockNumber > 0) ? -this->verticalScrollBar()->sliderPosition() : 0;
+    QTextBlock block {this->document()->findBlockByNumber(blockNumber)};
+    QTextBlock prev_block {(blockNumber > 0) ? this->document()->findBlockByNumber(blockNumber-1) : block};
+    int translate_y {(blockNumber > 0) ? -this->verticalScrollBar()->sliderPosition() : 0};
 
-    int top = this->viewport()->geometry().top();
+    int top {this->viewport()->geometry().top()};
 
     // Adjust text position according to the previous "non entirely visible" block
     // if applicable. Also takes in consideration the document's margin offset.
@@ -137,7 +137,7 @@ void EditorWidget::lineNumberAreaPaintEvent(QPaintEvent *event)
     // Shift the starting point
     top += additional_margin;
 
-    int bottom = top + (int) this->document()->documentLayout()->blockBoundingRect(block).height();
+    int bottom {top + (int) this->document()->documentLayout()->blockBoundingRect(block).height()};
 
     QColor col_1(90, 255, 30);      // Current line (custom green)
     QColor col_0(120, 120, 120);    // Other lines  (custom darkgrey)
@@ -145,7 +145,7 @@ void EditorWidget::lineNumberAreaPaintEvent(QPaintEvent *event)
     // Draw the numbers
     while (block.isValid() && top <= event->rect().bottom()) {
         if (block.isVisible() && bottom >= event->rect().top()) {
-            QString number = QString::number(blockNumber + 1);
+            QString number {QString::number(blockNumber + 1)};
             painter.setPen("Black");
             painter.drawText(-5, top,
                              lineNumberArea->width(), fontMetrics().height(),
@@ -163,7 +163,7 @@ void EditorWidget::lineNumberAreaPaintEvent(QPaintEvent *event)
 void EditorWidget::paintEvent(QPaintEvent *event) {
 
     //get ID of current block
-    int currentBlockID = textCursor().blockNumber();
+    int currentBlockID {textCursor().blockNumber()};
     //get current block
     QTextCursor currentCursor {textCursor()};
 

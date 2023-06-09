@@ -7,7 +7,6 @@
 
 #include <QTextEdit>
 #include <QAction>
-#include <QColor>
 
 class ToolHandler : public QObject{
 

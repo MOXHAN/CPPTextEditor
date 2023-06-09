@@ -6,10 +6,6 @@
 #define ALPHA_EDITOR_MAINWINDOW_H
 
 #include <QMainWindow>
-#include <QMenuBar>
-#include <QToolBar>
-#include <QTextCharFormat>
-#include <QTextEdit>
 
 #include "EditorWidget.h"
 
