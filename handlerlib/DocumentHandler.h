@@ -15,8 +15,8 @@ public:
 
     //delete ctor
     DocumentHandler() = delete;
-    static void addDocumentToMap(std::string key, std::string path);
-    static std::string getDocumentPathFromMap(std::string key);
+    static void addDocumentToMap(const std::string &key, const std::string &path);
+    static std::string getDocumentPathFromMap(const std::string &key);
     static int getDocumentCount();
 
 private:

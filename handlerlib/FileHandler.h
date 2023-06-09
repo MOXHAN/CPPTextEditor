@@ -16,9 +16,9 @@ class FileHandler : public QObject{
 public:
     static void handleSave(QTextEdit *editorWidget);
     static void handleLoad(QTextEdit *editorWidget);
-    static void handleLoad(QTextEdit *editorWidget, std::string path);
+    static void handleLoad(QTextEdit *editorWidget, const std::string &path);
     static void loadLast(QTextEdit *editorWidget);
-    static void savePathLast(std::string path);
+    static void savePathLast(const std::string &path);
     static std::string getPathLastFile();
     static void handleExportPdf(QTextEdit *editorWidget);
 

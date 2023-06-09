@@ -66,7 +66,7 @@ void FileHandler::handleLoad(QTextEdit *editorWidget){
 
 }
 
-void FileHandler::handleLoad(QTextEdit *editorWidget, std::string path){
+void FileHandler::handleLoad(QTextEdit *editorWidget, const std::string &path){
 
     //create file instream
     std::ifstream readFromFile {path};
@@ -116,7 +116,7 @@ void FileHandler::loadLast(QTextEdit *editorWidget) {
 //this function saves the given string (path) into a separate txt file
 //when the Popup-Dialog asking whether to open the last saved file is accepted
 //the path is read from this file
-void FileHandler::savePathLast(std::string path){
+void FileHandler::savePathLast(const std::string &path){
 
     //create file outstream
     std::ofstream writeToFile {"pathLast.txt"};
@@ -137,7 +137,7 @@ void FileHandler::handleExportPdf(QTextEdit *editorWidget) {
                                                     tr("Open Textfile"), "/home", tr("Pdf Files (*.pdf)"))};
     //get current text in editorWidget
     QString text {editorWidget->document()->toPlainText()};
-    //create pdfWrioter instance for file
+    //create pdfWriter instance for file
     QPdfWriter pdfWriter(fileName);
     //set page size and orientation
     pdfWriter.setPageSize(QPageSize::A4);
@@ -146,7 +146,7 @@ void FileHandler::handleExportPdf(QTextEdit *editorWidget) {
     QPainter painter(&pdfWriter);
     painter.setFont(QFont("Arial", 12));
     painter.drawText(QRectF(0, 0, pdfWriter.width(), pdfWriter.height()), text);
-    //end/delete painter and delete pdfwriter
+    //end/delete painter and delete pdf-writer
     painter.end();
     pdfWriter.deleteLater();
 

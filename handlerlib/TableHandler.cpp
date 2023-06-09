@@ -8,7 +8,7 @@
 void TableHandler::createTable(QTextEdit *editorWidget) {
 
     //get current doc in editorWidget and "save it"
-    QTextCursor cursor = editorWidget->textCursor();
+    QTextCursor cursor {editorWidget->textCursor()};
     //create Table
     cursor.insertTable(1,1);
     //set cursor back to editorWidget
@@ -19,9 +19,9 @@ void TableHandler::createTable(QTextEdit *editorWidget) {
 void TableHandler::addRow(QTextEdit *editorWidget) {
 
     //get current doc in editorWidget and "save it"
-    QTextCursor cursor = editorWidget->textCursor();
+    QTextCursor cursor {editorWidget->textCursor()};
     //get current table
-    QTextTable *table = cursor.currentTable();
+    QTextTable *table {cursor.currentTable()};
     //insert Row
     table->insertRows(1,1);
     //set cursor back to editorWidget
@@ -32,9 +32,9 @@ void TableHandler::addRow(QTextEdit *editorWidget) {
 void TableHandler::addCol(QTextEdit *editorWidget) {
 
     //get current doc in editorWidget and "save it"
-    QTextCursor cursor = editorWidget->textCursor();
+    QTextCursor cursor {editorWidget->textCursor()};
     //get current table
-    QTextTable *table = cursor.currentTable();
+    QTextTable *table {cursor.currentTable()};
     //insert Row
     table->insertColumns(1,1);
     //set cursor back to editorWidget

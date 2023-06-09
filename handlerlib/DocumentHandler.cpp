@@ -8,7 +8,7 @@
 //Define map
 std::unordered_map<std::string, std::string> DocumentHandler::documentPathMap;
 
-void DocumentHandler::addDocumentToMap(std::string key, std::string path) {
+void DocumentHandler::addDocumentToMap(const std::string &key, const std::string &path) {
 
     //add given doc and name as pair to unordered map
     DocumentHandler::documentPathMap[key] = path;
@@ -20,7 +20,7 @@ void DocumentHandler::addDocumentToMap(std::string key, std::string path) {
     }
 }
 
-std::string DocumentHandler::getDocumentPathFromMap(std::string key) {
+std::string DocumentHandler::getDocumentPathFromMap(const std::string &key) {
 
     std::cout << "Trying to get path for key: " << key << std::endl;
     return DocumentHandler::documentPathMap.at(key);
