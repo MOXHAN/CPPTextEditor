@@ -7,13 +7,8 @@
 
 
 #include <QTextEdit>
-#include <QPainter>
 #include <QPaintEvent>
-#include <QTextBlock>
-#include <QAbstractTextDocumentLayout>
 #include <QRectF>
-#include <QRect>
-#include <QScrollBar>
 
 
 class EditorWidget : public QTextEdit

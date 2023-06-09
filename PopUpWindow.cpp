@@ -2,13 +2,13 @@
 // Created by maximhansen on 29.05.2023.
 //
 
-#include "PopUpWindow.h"
-#include "handlerlib/FileHandler.h"
+#include <QVBoxLayout>
+#include <QFileDialog>
 #include <QAction>
 #include <QPushButton>
 #include <iostream>
-#include <QVBoxLayout>
-#include <QFileDialog>
+#include "PopUpWindow.h"
+#include "handlerlib/FileHandler.h"
 
 //ctor popup for load on start
 PopUpWindow::PopUpWindow(MainWindow *parent) : QDialog(parent){

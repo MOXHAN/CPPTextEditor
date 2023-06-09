@@ -4,9 +4,9 @@
 
 #include <QInputDialog>
 #include <QColor>
-#include "ToolHandler.h"
 #include <QTextBlock>
 #include <iostream>
+#include "ToolHandler.h"
 
 QString ToolHandler::lastFoundString;
 QTextCursor ToolHandler::lastFoundStringCursor;

@@ -2,12 +2,11 @@
 // Created by maximhansen on 30.05.2023.
 //
 
-#include <iostream>
+#include <QPushButton>
+#include <QMessageBox>
 #include "FileDocker.h"
 #include "handlerlib/DocumentHandler.h"
 #include "handlerlib/FileHandler.h"
-#include <QPushButton>
-#include <QMessageBox>
 
 FileDocker::FileDocker(MainWindow *parent, EditorWidget *editorWidget) : QDockWidget(parent){
 

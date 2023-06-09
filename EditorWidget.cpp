@@ -2,6 +2,10 @@
 // Created by maximhansen on 21.05.2023.
 //
 
+#include <QTextBlock>
+#include <QScrollBar>
+#include <QPainter>
+#include <QAbstractTextDocumentLayout>
 #include "EditorWidget.h"
 #include "LineNumberArea.h"
 #include "handlerlib/DocumentHandler.h"
@@ -22,7 +26,7 @@ EditorWidget::EditorWidget(QWidget *parent) : QTextEdit(parent){
     lineNumberAreaWidth = 13 +  fontMetrics().width(QLatin1Char('9')) * (4);
     setViewportMargins(lineNumberAreaWidth, 0, 0, 0);
 
-    //Horizontal Scroll instead of Linewrap
+    //Horizontal Scroll instead of Line-wrap
     setLineWrapMode(NoWrap);
     //Enable Undo/Redo
     setUndoRedoEnabled(true);
@@ -138,9 +142,6 @@ void EditorWidget::lineNumberAreaPaintEvent(QPaintEvent *event)
     top += additional_margin;
 
     int bottom {top + (int) this->document()->documentLayout()->blockBoundingRect(block).height()};
-
-    QColor col_1(90, 255, 30);      // Current line (custom green)
-    QColor col_0(120, 120, 120);    // Other lines  (custom darkgrey)
 
     // Draw the numbers
     while (block.isValid() && top <= event->rect().bottom()) {

@@ -2,16 +2,15 @@
 // Created by maximhansen on 16.05.2023.
 //
 
-#include <QFileDialog>
 #include <QMenuBar>
 #include <QToolBar>
 #include <iostream>
 #include "MainWindow.h"
-#include "handlerlib/ToolHandler.h"
 #include "EditorWidget.h"
-#include "handlerlib/FileHandler.h"
 #include "PopUpWindow.h"
 #include "FileDocker.h"
+#include "handlerlib/ToolHandler.h"
+#include "handlerlib/FileHandler.h"
 #include "handlerlib/TableHandler.h"
 
 

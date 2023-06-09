@@ -6,7 +6,6 @@
 #define ALPHA_EDITOR_MAINWINDOW_H
 
 #include <QMainWindow>
-
 #include "EditorWidget.h"
 
 class MainWindow : public QMainWindow {
