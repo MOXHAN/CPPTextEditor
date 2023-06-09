@@ -14,6 +14,8 @@ class FileHandler : public QObject{
     Q_OBJECT
 
 public:
+
+    FileHandler() = delete;
     static void handleSave(QTextEdit *editorWidget);
     static void handleLoad(QTextEdit *editorWidget);
     static void handleLoad(QTextEdit *editorWidget, const std::string &path);

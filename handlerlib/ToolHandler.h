@@ -12,8 +12,8 @@ class ToolHandler : public QObject{
 
     Q_OBJECT
 
-public slots:
-
+public:
+    ToolHandler() = delete;
     static void handleUnderline(QTextEdit *editorWidget, QAction *underline);
     static void handleBold(QTextEdit *editorWidget, QAction *bold);
     static void handleItalic(QTextEdit *editorWidget, QAction *italic);
