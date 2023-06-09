@@ -11,7 +11,7 @@
 class PopUpWindow : public QDialog{
 
 public:
-    PopUpWindow(MainWindow *parent);
+    explicit PopUpWindow(MainWindow *parent);
     PopUpWindow(MainWindow *parent, QTextDocument *document);
 
 };

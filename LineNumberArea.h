@@ -7,7 +7,6 @@
 
 
 #include <QWidget>
-
 #include "EditorWidget.h"
 
 class LineNumberArea : public QWidget
@@ -15,7 +14,7 @@ class LineNumberArea : public QWidget
 Q_OBJECT
 
 public:
-    LineNumberArea(QTextEdit *editor);
+    explicit LineNumberArea(QTextEdit *editor);
 
     QSize sizeHint() const;
 
