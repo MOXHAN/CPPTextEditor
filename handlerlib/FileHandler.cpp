@@ -47,58 +47,92 @@ void FileHandler::handleLoad(QTextEdit *editorWidget){
     QString fileName {QFileDialog::getOpenFileName(editorWidget,
                                             tr("Open Textfile"), "/home", tr("Text Files (*.txt)"))};
     //create file instream
-    std::ifstream readFromFile {fileName.toStdString()};
-    //Declare std string for read and qstring for write to document
-    std::string data;
+    std::ifstream readFromFile {};
+    try {
+        readFromFile.exceptions(std::ifstream::failbit);
+        readFromFile.open(fileName.toStdString());
 
-    std::ostringstream ss;
-    ss << readFromFile.rdbuf();
-    data = ss.str();
+        if(readFromFile.is_open()){
+            //Declare std string for read and qstring for write to document
+            std::string data;
 
-    QTextDocument *document {editorWidget->document()};
-    //convert std to q string
-    QString qstring {QString::fromStdString(data)};
-    //write qstring to document
-    document->setHtml(qstring);
+            std::ostringstream ss;
+            ss << readFromFile.rdbuf();
+            data = ss.str();
 
-    //Logging
-    std::cout << "FILE-LOG: successfully loaded file " << fileName.toStdString() << std::endl;
+            QTextDocument *document {editorWidget->document()};
+            //convert std to q string
+            QString qstring {QString::fromStdString(data)};
+            //write qstring to document
+            document->setHtml(qstring);
 
+            //Logging
+            std::cout << "FILE-LOG: successfully loaded file " << fileName.toStdString() << std::endl;
+        }
+        readFromFile.close();
+    }
+    catch (std::ifstream::failure e){
+        std::cerr << "FILE-LOG: " << e.what() << std::endl;
+    }
 }
 
 void FileHandler::handleLoad(QTextEdit *editorWidget, const std::string &path){
 
     //create file instream
-    std::ifstream readFromFile {path};
-    //Declare std string for read and qstring for write to document
-    std::string data;
+    std::ifstream readFromFile {};
 
-    std::ostringstream ss;
-    ss << readFromFile.rdbuf();
-    data = ss.str();
+    try{
+        readFromFile.exceptions(std::ifstream::failbit);
+        readFromFile.open(path);
 
-    //convert std to q string
-    QString qstring {QString::fromStdString(data)};
-    //get document in editor
-    QTextDocument *document {editorWidget->document()};
-    //write qstring to document
-    document->setHtml(qstring);
+        if(readFromFile.is_open()){
+            //Declare std string for read and qstring for write to document
+            std::string data;
 
-    //Logging
-    std::cout << "FILE-LOG: successfully loaded file from path: " << path << std::endl;
+            std::ostringstream ss;
+            ss << readFromFile.rdbuf();
+            data = ss.str();
+
+            //convert std to q string
+            QString qstring {QString::fromStdString(data)};
+            //get document in editor
+            QTextDocument *document {editorWidget->document()};
+            //write qstring to document
+            document->setHtml(qstring);
+
+            //Logging
+            std::cout << "FILE-LOG: successfully loaded file from path: " << path << std::endl;
+        }
+        readFromFile.close();
+    }
+    catch (std::ifstream::failure e){
+        std::cerr << "FILE-LOG: " << e.what() << std::endl;
+    }
 }
 
 std::string FileHandler::getPathLastFile() {
     //create file instream
-    std::ifstream readFromFile {"pathLast.txt"};
-    //Declare std string for read
-    std::string path;
+    std::ifstream readFromFile {};
 
-    std::ostringstream ss;
-    ss << readFromFile.rdbuf();
-    path = ss.str();
+    try {
+        readFromFile.exceptions(std::ifstream::failbit);
+        readFromFile.open("pathLast.txt");
 
-    return path;
+        if(readFromFile.is_open()){
+            //Declare std string for read
+            std::string path;
+
+            std::ostringstream ss;
+            ss << readFromFile.rdbuf();
+            path = ss.str();
+
+            return path;
+        }
+        readFromFile.close();
+    }
+    catch (std::ifstream::failure e){
+        std::cerr << "FILE-LOG: " << e.what() << std::endl;
+    }
 }
 
 void FileHandler::loadLast(QTextEdit *editorWidget) {
