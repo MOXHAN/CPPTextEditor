@@ -19,6 +19,9 @@ public:
     void addDocButton();
     void addButton();
 
+public slots:
+    void handleActionDelete();
+
 private:
     QToolBar *fileBar;
     EditorWidget *editorWidget;

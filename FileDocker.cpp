@@ -64,6 +64,8 @@ void FileDocker::addButton() {
         //fileBar->removeAction(button);
         //button->deleteLater();
     });
+    //connect button to slot for deleting the button
+    connect(button, &QAction::triggered, this, &FileDocker::handleActionDelete);
     //add button to toolbar
     fileBar->addAction(button);
 
@@ -77,10 +79,10 @@ void FileDocker::addDocButton() {
     QString buttonText {"document " + QString::fromStdString(std::to_string(DocumentHandler::getDocumentCount()))};
     //create action/button for given document
     QAction *button {new QAction(buttonText, this)};
+    //get path of file to load
+    std::string path {DocumentHandler::getDocumentPathFromMap("document " + std::to_string(DocumentHandler::getDocumentCount()))};
 
-    connect(button, &QAction::triggered, this, [&] () {
-        //get path of file to load
-        std::string path {DocumentHandler::getDocumentPathFromMap("document " + std::to_string(DocumentHandler::getDocumentCount()))};
+    connect(button, &QAction::triggered, this, [this, path] () {
         //load file
         FileHandler::handleLoad(editorWidget, path);
     });
@@ -88,3 +90,12 @@ void FileDocker::addDocButton() {
     fileBar->addAction(button);
     setWidget(fileBar);
 };
+
+void FileDocker::handleActionDelete() {
+
+    //get sender (action/button)
+    QAction* action = qobject_cast<QAction*>(sender());
+    //remove action/button from my filebar
+    fileBar->removeAction(action);
+
+}

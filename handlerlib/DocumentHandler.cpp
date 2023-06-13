@@ -22,7 +22,7 @@ void DocumentHandler::addDocumentToMap(const std::string &key, const std::string
 
 std::string DocumentHandler::getDocumentPathFromMap(const std::string &key) {
 
-    std::cout << "Trying to get path for key: " << key << std::endl;
+    std::cout << "DOC-LOG: Trying to get path for key: " << key << std::endl;
     return DocumentHandler::documentPathMap.at(key);
 
 }
