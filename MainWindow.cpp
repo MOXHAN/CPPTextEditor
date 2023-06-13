@@ -129,10 +129,12 @@ void MainWindow::setupToolBar() {
     //button to add rows to table
     QAction *addRow {new QAction("add row", this)};
     toolbar->addAction(addRow);
+    addRow->setVisible(false);
 
     //button to add columns to table
     QAction *addCol {new QAction("add column", this)};
     toolbar->addAction(addCol);
+    addCol->setVisible(false);
 
     //Connect Signals and Slots
     connect(underline, &QAction::triggered, this, [this, underline] (){
@@ -153,8 +155,10 @@ void MainWindow::setupToolBar() {
     connect(undo, &QAction::triggered, this, [this] () {
        ToolHandler::handleUndo(editorWidget);
     });
-    connect(createTable, &QAction::triggered, this, [this] () {
+    connect(createTable, &QAction::triggered, this, [this, addRow, addCol] () {
         TableHandler::createTable(editorWidget);
+        addRow->setVisible(true);
+        addCol->setVisible(true);
     });
     connect(addRow, &QAction::triggered, this, [this] () {
         TableHandler::addRow(editorWidget);
