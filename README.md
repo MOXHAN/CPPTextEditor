@@ -28,25 +28,31 @@ Externe Libraries: Qt
 
 ### Anforderungen
 
-| Anforderungs Nr.                                   | Wie gelöst                                                                                                            | Wo zu finden                                    |
-|----------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------|-------------------------------------------------|
-| Erzeugen eigener Bibliothek                        | Erstellung der Library "Handlerlib"                                                                                   | Subdirectory "Handlerlib"                       |
-| Verwendung externer Bibliotheken                   | Verwendung der Qt Library                                                                                             |                                                 |
-| Funktionsüberladung                                |                                                                                                                       | FileHandler.cpp -> Funktion "handleLoad"        |
-| Operatorüberladung                                 | Überladung des << Operators für Qt Class                                                                              | FileHandler.cpp                                 |
+| Anforderungs Nr.                                   | Wie gelöst                                                                                                            | Wo zu finden                                          |
+|----------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------|
+| Erzeugen eigener Bibliothek                        | Erstellung der Library "Handlerlib"                                                                                   | Subdirectory "Handlerlib"                             |
+| Verwendung externer Bibliotheken                   | Verwendung der Qt Library                                                                                             |                                                       |
+| Funktionsüberladung                                |                                                                                                                       | FileHandler.cpp -> Funktion "handleLoad"              |
+| Operatorüberladung                                 | Überladung des << Operators für Qt Class                                                                              | FileHandler.cpp                                       |
 | Datei und Konsolen IO                              | Console Logging in allen Klassen der "Handlerlib" und Datei-Logging durch "speichern als .txt"                        ||
-| Verwendung von C++ Smart Pointern                  | Wurde aufgrund der eigenen Speicherverwaltung von Qt nur beispielhaft einmal umgesetzt                                ||
-| Verwendung von weiteren std Containern             | Verwendung std::unordered_map                                                                                         | DocumentHandler.h, Zeile 24                     |
-| Verwendung von Laufzeitpolymorphismus              | Verwendung der Parent-Class "QTextEdit" statt der eigens implemntierten Child-Class in allen Klassen der "Handlerlib" | Handlerlib                                      |
-| Nutzung von move-Semantik                          | Der Inhalt des QTextDocuments wird als rvalue übergeben und auf die Konsole ausgegeben                                | MainWindow.cpp, Zeile 76                        |
-| Vermeidung von "rohen" Zeigern                     | Außerhalb der Verwendung von Zeigern im Zusammenhang mit der Qt Library wurden keine rohen Zeiger verwendet           |                                                 |
-| Erstellung einer Template Klasse und/oder Funktion | Funktion "print()", die die Konsolenausgaben Syntax vereinfacht ( print(text) statt std::cout << text usw. )          | ToolHandler.cpp, Zeile 19ff                     |
-| Profiling                                          | Ergebnisse weiter unten                                                                                               |                                                 |
+| Verwendung von C++ Smart Pointern                  | Wurde aufgrund der eigenen Speicherverwaltung von Qt nur beispielhaft einmal umgesetzt                                | MainWindow.cpp, Zeile 52                              |
+| Verwendung von weiteren std Containern             | Verwendung std::unordered_map                                                                                         | DocumentHandler.h, Zeile 24                           |
+| Verwendung von Laufzeitpolymorphismus              | Verwendung der Parent-Class "QTextEdit" statt der eigens implemntierten Child-Class in allen Klassen der "Handlerlib" | Handlerlib                                            |
+| Nutzung von move-Semantik                          | Der Inhalt des QTextDocuments wird als rvalue übergeben und auf die Konsole ausgegeben                                | MainWindow.cpp, Zeile 76                              |
+| Vermeidung von "rohen" Zeigern                     | Außerhalb der Verwendung von Zeigern im Zusammenhang mit der Qt Library wurden keine rohen Zeiger verwendet           |                                                       |
+| Erstellung einer Template Klasse und/oder Funktion | Funktion "print()", die die Konsolenausgaben Syntax vereinfacht ( print(text) statt std::cout << text usw. )          | ToolHandler.cpp, Zeile 19ff                           |
+| Profiling                                          | Ergebnisse weiter unten                                                                                               |                                                       |
 | Versionskontrolle mit Git                          | Github Repo erstellt                                                                                                  | https://github.com/MOXHAN/CPPTextEditor#cpptexteditor |
-| Linting mit Clang-Tidy                             | Linting wurde ausgeführt                                                                                              |                                                 |
-| Min. 500 Zeilen Code                               | ~800 Non-Comment Lines of Code | |
-| Readme.md Datei erstellen                          | Diese Datei | |
+| Linting mit Clang-Tidy                             | Linting wurde während der Entwicklung durch eingebaute Vorschläge verwendet                                           |                                                       |
+| Min. 500 Zeilen Code                               | ~800 Non-Comment Lines of Code                                                                                        |                                                       |
+| Readme.md Datei erstellen                          | Diese Datei                                                                                                           |                                                       |
 
+
+### profiling Ergebnisse 
+
+Ich bezweilfe ehrlich gesagt, ob ich das Profiling richtig ausgeführt habe, leider gibt es auf WIndows
+nicht die Möglichkeit das Ganze innerhalb von CLion zu machen, daher hab ich
+nach Ratschlägen auf StackOverflow auf "VerySleepy" zurückgegriffen. Die Ergebnisse sind in einer CSV-Datei im Verzeichnis.
 
 ### Projektstruktur und Klassenhierarchie
 
@@ -87,6 +93,11 @@ wenn dann wieder gesucht wird, geht es beim Anfang des Dokumentes wieder los
 so ausgelegt ist, dass es einen Horizontal-Scroll gibt, statt einer Zeilenlängenbegrenzung
 - Wenn mehrere Tabellen in einem Dokument erschaffen wurden, gibt es keine Möglichkeit
 zu bestimmen welche mit den Buttons "addRow" und "addCol" erweitert werden soll
+- Das Feature mehrere Dokumente gleichzeitig zu öffnen hat noch Fehleranfälligkeiten im Bereich der Buttons.
+Damit das Feature funktioniert, muss immer das Dokument abgespeichert werden, bevor ein neues
+geöffnet wird und wenn ein neues geöffnet ist und dieses nicht abgespeichert wird durch
+das Drücken des + Buttons, wird der Button für dieses Dokument nicht funktionieren, da kein
+Link hinterlegt ist
 
 Mögliche Weitere Features:
 - Export zu PDF Probleme beheben
