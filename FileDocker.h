@@ -15,10 +15,6 @@ class FileDocker : public QDockWidget{
 public:
     explicit FileDocker(MainWindow *parent, EditorWidget *editorWidget);
 
-    void createNewDoc();
-    void addDocButton();
-    void addButton();
-
 public slots:
     void handleActionDelete();
 
@@ -26,6 +22,9 @@ private:
     QToolBar *fileBar;
     EditorWidget *editorWidget;
 
+    void createNewDoc();
+    void addDocButton();
+    void addButton();
 };
 
 

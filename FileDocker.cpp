@@ -14,8 +14,7 @@ FileDocker::FileDocker(MainWindow *parent, EditorWidget *editorWidget) : QDockWi
     this->editorWidget = editorWidget;
     //create toolbar
     fileBar = new QToolBar {this};
-
-    //create button for first doc
+    //create first + button
     addButton();
 
 }
@@ -60,9 +59,6 @@ void FileDocker::addButton() {
         addDocButton();
         //add new button for next doc
         addButton();
-        //remove plusButton
-        //fileBar->removeAction(button);
-        //button->deleteLater();
     });
     //connect button to slot for deleting the button
     connect(button, &QAction::triggered, this, &FileDocker::handleActionDelete);
