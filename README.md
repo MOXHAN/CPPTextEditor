@@ -26,6 +26,9 @@ Externe Libraries: Qt
 
 ### Anleitung zum Bauen unter msys2/mingw64
 
+Zum erfolgreichen Bauen muss nur das Tutorial "Qt Minimal Beispiel" zur Installierung aller nötigen
+Tools und Libraries befolgt werden.
+
 ### Anforderungen
 
 | Anforderungs Nr.                                   | Wie gelöst                                                                                                            | Wo zu finden                                          |
