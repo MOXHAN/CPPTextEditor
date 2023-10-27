@@ -1,7 +1,7 @@
 # CPPTextEditor
 
 ### Projektteilnehmer
-Maxim Hansen - 937236
+Maxim Hansen
 
 ### Projektbeschreibung
 Das Ziel des Projektes war es einen simplen Texteditor zu erstellen. Der erstellte 
